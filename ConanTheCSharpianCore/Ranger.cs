@@ -6,11 +6,10 @@ namespace ConanTheCSharpian.Core
     {
         public Ranger()
         {
-            // TODO: change them
-            Name = "Conan";
-            Damage = 30;
-            MaxHealth = 120;
-            Accuracy = 0.6f;
+            Name = "Drizzt";
+            Damage = 15;
+            MaxHealth = 85;
+            Accuracy = 0.95f;
         }
 
         public override void PerformSpecialAction()

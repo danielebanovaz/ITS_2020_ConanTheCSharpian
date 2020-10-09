@@ -6,11 +6,10 @@ namespace ConanTheCSharpian.Core
     {
         public Warlock()
         {
-            // TODO: change them
-            Name = "Conan";
-            Damage = 30;
-            MaxHealth = 120;
-            Accuracy = 0.6f;
+            Name = "Saruman";
+            Damage = 15;
+            MaxHealth = 70;
+            Accuracy = 0.7f;
         }
 
         public override void PerformSpecialAction()

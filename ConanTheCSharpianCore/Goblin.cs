@@ -6,11 +6,10 @@ namespace ConanTheCSharpian.Core
     {
         public Goblin()
         {
-            // TODO: change them
-            Name = "Conan";
-            Damage = 30;
-            MaxHealth = 120;
-            Accuracy = 0.6f;
+            Name = "Creld";
+            Damage = 20;
+            MaxHealth = 85;
+            Accuracy = 0.8f;
         }
 
         public override void PerformSpecialAction()

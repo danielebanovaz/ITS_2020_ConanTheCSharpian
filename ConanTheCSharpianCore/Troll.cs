@@ -6,11 +6,10 @@ namespace ConanTheCSharpian.Core
     {
         public Troll()
         {
-            // TODO: change them
-            Name = "Conan";
-            Damage = 30;
-            MaxHealth = 120;
-            Accuracy = 0.6f;
+            Name = "Durgh";
+            Damage = 50;
+            MaxHealth = 160;
+            Accuracy = 0.3f;
         }
 
         public override void PerformSpecialAction()

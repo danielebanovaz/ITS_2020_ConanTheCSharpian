@@ -6,11 +6,10 @@ namespace ConanTheCSharpian.Core
     {
         public Mage()
         {
-            // TODO: change them
-            Name = "Conan";
-            Damage = 30;
-            MaxHealth = 120;
-            Accuracy = 0.6f;
+            Name = "Vlad";
+            Damage = 18;
+            MaxHealth = 50;
+            Accuracy = 0.85f;
         }
 
         public override void PerformSpecialAction()
