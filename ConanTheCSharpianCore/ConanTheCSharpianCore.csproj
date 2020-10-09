@@ -41,6 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MonsterParty.cs" />
+    <Compile Include="Warlock.cs" />
+    <Compile Include="Troll.cs" />
+    <Compile Include="Goblin.cs" />
+    <Compile Include="Mage.cs" />
+    <Compile Include="Ranger.cs" />
+    <Compile Include="HeroParty.cs" />
+    <Compile Include="IParty.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Barbarian.cs" />
     <Compile Include="Monster.cs" />
