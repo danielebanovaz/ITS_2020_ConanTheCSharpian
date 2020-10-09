@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConanTheCSharpianClient", "ConanTheCSharpianClient\ConanTheCSharpianClient.csproj", "{843ACBAC-7330-49A8-9253-0D8BD39F8839}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D7705DC9-F21B-41FE-8359-368DEBFC4081} = {D7705DC9-F21B-41FE-8359-368DEBFC4081}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConanTheCSharpianCore", "ConanTheCSharpianCore\ConanTheCSharpianCore.csproj", "{D7705DC9-F21B-41FE-8359-368DEBFC4081}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{843ACBAC-7330-49A8-9253-0D8BD39F8839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843ACBAC-7330-49A8-9253-0D8BD39F8839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843ACBAC-7330-49A8-9253-0D8BD39F8839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843ACBAC-7330-49A8-9253-0D8BD39F8839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7705DC9-F21B-41FE-8359-368DEBFC4081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7705DC9-F21B-41FE-8359-368DEBFC4081}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7705DC9-F21B-41FE-8359-368DEBFC4081}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7705DC9-F21B-41FE-8359-368DEBFC4081}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F86E8FF-591E-4E13-BF76-66D6E40CEB78}
+	EndGlobalSection
+EndGlobal
