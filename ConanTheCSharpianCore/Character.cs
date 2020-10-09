@@ -36,6 +36,11 @@ namespace ConanTheCSharpian.Core
         /// </summary>
         protected float Accuracy;
 
+        /// <summary>
+        /// Character controller currently in charge of controlling this character
+        /// </summary>
+        private ICharacterController _controller;
+
         #endregion Fields
 
         #region Actions
