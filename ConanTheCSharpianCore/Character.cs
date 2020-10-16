@@ -8,6 +8,8 @@ namespace ConanTheCSharpian.Core
 {
     public abstract class Character
     {
+        private static Random _random = new Random();
+
         #region Fields & Properties
 
         /// <summary>
@@ -50,6 +52,11 @@ namespace ConanTheCSharpian.Core
         /// Character controller currently in charge of controlling this character
         /// </summary>
         private ICharacterController _controller;
+
+        /// <summary>
+        /// Battlefield in which this character acts
+        /// </summary>
+        private Battlefield _battlefield;
 
         /// <summary>
         /// Current health of the character.
@@ -98,11 +105,31 @@ namespace ConanTheCSharpian.Core
 
         #endregion Fields & Properties
 
+        public void Initialize(Battlefield battlefield, ICharacterController controller)
+        {
+            _battlefield = battlefield;
+            _controller = controller;
+            CurrentHealth = MaxHealth;
+        }
+
         #region Actions
 
         public void PerformBaseAttack()
         {
-            // TODO: I have to implement that
+            Character target = null;
+
+            // TODO: get a proper target
+
+            if (_random.NextDouble() > Accuracy)
+            {
+                // TODO: move to Client
+                Console.WriteLine($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
+                return;
+            }
+
+            target.CurrentHealth -= Damage;
+            // TODO: move to Client
+            Console.WriteLine($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
         }
 
         public abstract void PerformSpecialAction();
