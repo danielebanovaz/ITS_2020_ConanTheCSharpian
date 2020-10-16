@@ -1,13 +1,21 @@
 ﻿
 
+using System;
+
 namespace ConanTheCSharpian.Core
 {
     public class Ai : ICharacterController
     {
-        public void ChooseAttackType(Character controllerCharacter)
+        private Random _random = new Random();
+
+        public void ChooseAttackType(Character controlledCharacter)
         {
-            // TODO:
-            throw new System.NotImplementedException();
+            int randomDiceRoll = _random.Next(1, 10);
+
+            if (randomDiceRoll <= 3)
+                controlledCharacter.PerformSpecialAction();
+            else
+                controlledCharacter.PerformBaseAttack();
         }
     }
 }

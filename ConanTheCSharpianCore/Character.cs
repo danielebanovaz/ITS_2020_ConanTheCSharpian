@@ -8,12 +8,22 @@ namespace ConanTheCSharpian.Core
 {
     public abstract class Character
     {
-        #region Fields
+        #region Fields & Properties
 
         /// <summary>
         /// Name of the Character
         /// </summary>
         public string Name { get; protected set; } // We changed it into a property to give public read access and mantain protected write access
+
+        // ^^^^ This property is written in a compact form; it's equivalent to:
+        //
+        // private string _verboseNameProperty;
+        // public string VerboseNameProperty
+        // {
+        //     get { return _verboseNameProperty; }
+        //     protected set { _verboseNameProperty = value; }
+        // }
+
 
         /// <summary>
         /// Base damage inflicted by the Character
@@ -40,10 +50,6 @@ namespace ConanTheCSharpian.Core
         /// Character controller currently in charge of controlling this character
         /// </summary>
         private ICharacterController _controller;
-
-        #endregion Fields
-
-        #region Properties
 
         /// <summary>
         /// Current health of the character.
@@ -90,7 +96,7 @@ namespace ConanTheCSharpian.Core
             }
         }
 
-        #endregion Properties
+        #endregion Fields & Properties
 
         #region Actions
 

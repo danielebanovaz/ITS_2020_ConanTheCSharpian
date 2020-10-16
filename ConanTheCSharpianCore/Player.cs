@@ -16,7 +16,7 @@ namespace ConanTheCSharpian.Core
             throw new System.NotImplementedException();
         }
 
-        public void ChooseAttackType(Character controllerCharacter)
+        public void ChooseAttackType(Character controlledCharacter)
         {
             // TODO:
             throw new System.NotImplementedException();

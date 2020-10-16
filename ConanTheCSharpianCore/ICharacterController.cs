@@ -4,6 +4,6 @@ namespace ConanTheCSharpian.Core
 {
     public interface ICharacterController
     {
-        void ChooseAttackType(Character controllerCharacter);
+        void ChooseAttackType(Character controlledCharacter);
     }
 }

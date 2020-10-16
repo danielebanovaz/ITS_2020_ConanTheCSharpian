@@ -14,15 +14,6 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // OLD, CLUMSY WAY:
-            //float modifiedHealth = GetCurrentHealth();
-            //modifiedHealth += 5;
-            //SetCurrentHealth(modifiedHealth);
-
-            // MORE READABLE, USING PROPERTIES
-            CurrentHealth += 5;
-
-
             // TODO: implement special action logic
             throw new System.NotImplementedException();
         }
