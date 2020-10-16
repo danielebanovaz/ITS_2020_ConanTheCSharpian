@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Battlefield.cs" />
     <Compile Include="Ai.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="ICharacterController.cs" />
     <Compile Include="MonsterParty.cs" />
     <Compile Include="Warlock.cs" />

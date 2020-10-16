@@ -109,4 +109,15 @@ namespace ConanTheCSharpian.Core
 
         #endregion Actions
     }
+
+    public enum CharacterType
+    {
+        Barbarian,
+        Ranger,
+        Mage,
+        Troll,
+        Goblin,
+        Warlock
+    }
+
 }
