@@ -71,7 +71,7 @@ namespace ConanTheCSharpian.Core
         /// </summary>
         public string GetFullyQualifiedName()
         {
-            // TODO: I have to implement that
+            return $"{Name}, the {GetCategory()}";
         }
 
         public bool IsDead()
