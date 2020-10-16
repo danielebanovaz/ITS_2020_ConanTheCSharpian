@@ -13,7 +13,7 @@ namespace ConanTheCSharpian.Core
         /// <summary>
         /// Name of the Character
         /// </summary>
-        protected string Name;
+        public string Name { get; protected set; } // We changed it into a property to give public read access and mantain protected write access
 
         /// <summary>
         /// Base damage inflicted by the Character
@@ -43,6 +43,55 @@ namespace ConanTheCSharpian.Core
 
         #endregion Fields
 
+        #region Properties
+
+        /// <summary>
+        /// Current health of the character.
+        /// Automatically handles Max Health capping and avoids resurrection
+        /// </summary>
+        public float CurrentHealth
+        {
+            // Equivalent to "GetCurrentHealth()"
+            get
+            {
+                return _currentHealth;
+            }
+
+            // Equivalent to "SetCurrentHealth(value)"
+            protected set
+            {
+                if (value > MaxHealth)
+                    value = MaxHealth;
+
+                if (IsDead)
+                    return;
+
+                _currentHealth = value;
+            }
+        }
+
+        /// <summary>
+        /// Get class name for this character
+        /// I.E.: "Mage", "Barbarian", "Troll"...
+        /// </summary>
+        private string Category { get { return GetType().Name; } }
+
+        /// <summary>
+        /// Get a fully qualified name for the character, using Name and Category.
+        /// I.E.: "Gandalf, the Mage"
+        /// </summary>
+        public string FullyQualifiedName => $"{Name}, the {Category}"; // even more condensed way of writing get { return ... }
+
+        public bool IsDead
+        {
+            get
+            {
+                return _currentHealth <= 0;
+            }
+        }
+
+        #endregion Properties
+
         #region Actions
 
         public void PerformBaseAttack()
@@ -53,48 +102,5 @@ namespace ConanTheCSharpian.Core
         public abstract void PerformSpecialAction();
 
         #endregion Actions
-
-        #region Getters and setters
-
-        /// <summary>
-        /// Get class name for this character
-        /// I.E.: "Mage", "Barbarian", "Troll"...
-        /// </summary>
-        private string GetCategory()
-        {
-            return GetType().Name;
-        }
-
-        /// <summary>
-        /// Get a fully qualified name for the character, using Name and Category.
-        /// I.E.: "Gandalf, the Mage"
-        /// </summary>
-        public string GetFullyQualifiedName()
-        {
-            return $"{Name}, the {GetCategory()}";
-        }
-
-        public bool IsDead()
-        {
-            return _currentHealth <= 0;
-        }
-
-        public float GetCurrentHealth()
-        {
-            return _currentHealth;
-        }
-
-        public void SetCurrentHealth(float health)
-        {
-            if (health > MaxHealth)
-                health = MaxHealth;
-
-            if (IsDead())
-                return;
-
-            _currentHealth = health;
-        }
-
-        #endregion Getters and setters
     }
 }
