@@ -116,9 +116,9 @@ namespace ConanTheCSharpian.Core
 
         public void PerformBaseAttack()
         {
-            Character target = null;
-
-            // TODO: get a proper target
+            List<Character> validTargets = _battlefield.GetValidTargets(this, TargetType.Opponents);
+            int randomIndex = _random.Next(0, validTargets.Count - 1);
+            Character target = validTargets[randomIndex];
 
             if (_random.NextDouble() > Accuracy)
             {

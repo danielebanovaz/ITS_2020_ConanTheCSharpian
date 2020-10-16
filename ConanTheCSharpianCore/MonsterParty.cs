@@ -1,5 +1,8 @@
 ﻿
 
+using System;
+using System.Collections.Generic;
+
 namespace ConanTheCSharpian.Core
 {
     public class MonsterParty : IParty
@@ -10,7 +13,22 @@ namespace ConanTheCSharpian.Core
 
         public bool IsEverybodyDead()
         {
-            return _goblin.IsDead() && _troll.IsDead() && _warlock.IsDead();
+            return _goblin.IsDead && _troll.IsDead && _warlock.IsDead;
+        }
+
+        public List<Character> GetAliveCharacters()
+        {
+            List<Character> aliveCharacters = new List<Character>();
+            if (!_goblin.IsDead)
+                aliveCharacters.Add(_goblin);
+
+            if (!_troll.IsDead)
+                aliveCharacters.Add(_troll);
+
+            if (!_warlock.IsDead)
+                aliveCharacters.Add(_warlock);
+
+            return aliveCharacters;
         }
     }
 }
