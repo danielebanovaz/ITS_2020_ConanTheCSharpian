@@ -35,27 +35,6 @@ namespace ConanTheCSharpian.Core
             _heroes = new HeroParty(this, _ai);
             _monsters = new MonsterParty(this, _ai);
 
-            #region Dictionary example
-
-            // We are used to access collections through their indexex
-            // I.E.: dictionary containing shoe numbers (int), accessed by owner name (string)
-            Dictionary<string, int> shoeNumbers = new Dictionary<string, int>();
-            shoeNumbers["Giovanni"] = 43;
-            int currentShoeNumber = shoeNumbers["Mirko"];
-
-            // We could have used a proper Dictionary to store a party of heroes (Character),
-            // and access them by their type (CharacterType)
-            Dictionary<CharacterType, Character> heroParty = new Dictionary<CharacterType, Character>();
-            heroParty[CharacterType.Barbarian] = new Barbarian();
-            Character currentHero = heroParty[CharacterType.Mage];
-
-            // By adding a proper INDEXER to our HeroParty class,
-            // we can now use it as if it were a Dictionary,
-            // therefore accessing it by its CharacterType
-            currentHero = _heroes[CharacterType.Ranger];
-
-            #endregion Dictionary example
-
             Character userControlledCharacter = _heroes[userControlledCharacterType];
             userControlledCharacter.Initialize(this, playerController, userControlledCharacterName);
 

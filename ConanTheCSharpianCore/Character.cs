@@ -96,7 +96,7 @@ namespace ConanTheCSharpian.Core
         /// Get class name for this character
         /// I.E.: "Mage", "Barbarian", "Troll"...
         /// </summary>
-        private string Category { get { return GetType().Name; } }
+        public CharacterType Category { get { return (CharacterType)Enum.Parse(typeof(CharacterType), GetType().Name); } }
 
         /// <summary>
         /// Get a fully qualified name for the character, using Name and Category.
