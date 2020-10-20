@@ -17,6 +17,7 @@ namespace ConanTheCSharpian.Core
         /// </summary>
         public string Name { get; protected set; } // We changed it into a property to give public read access and mantain protected write access
 
+
         // ^^^^ This property is written in a compact form; it's equivalent to:
         //
         // private string _verboseNameProperty;
@@ -113,6 +114,14 @@ namespace ConanTheCSharpian.Core
         }
 
         #region Actions
+
+        internal void Act()
+        {
+            if (IsDead)
+                return;
+
+            _controller.ChooseAttackType(this);
+        }
 
         public void PerformBaseAttack()
         {

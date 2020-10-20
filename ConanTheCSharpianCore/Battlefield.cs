@@ -35,7 +35,8 @@ namespace ConanTheCSharpian.Core
         {
             foreach (Character character in party.GetAliveCharacters())
             {
-                // TODO: act
+                character.Act();
+
                 if (IsGameFinished)
                     return true;
             }
