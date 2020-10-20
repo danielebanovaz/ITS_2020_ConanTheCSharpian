@@ -81,6 +81,14 @@ namespace ConanTheCSharpian.Core
                     return;
 
                 _currentHealth = value;
+
+                if (IsDead)
+                {
+                    if (this is Hero)
+                        _battlefield.DisplayMessage($"Oh no! {FullyQualifiedName} just perished.");
+                    else
+                        _battlefield.DisplayMessage($"Yes! That fithy {FullyQualifiedName} has been slained.");
+                }
             }
         }
 
@@ -131,14 +139,12 @@ namespace ConanTheCSharpian.Core
 
             if (_random.NextDouble() > Accuracy)
             {
-                // TODO: move to Client
-                Console.WriteLine($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
+                _battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
                 return;
             }
 
             target.CurrentHealth -= Damage;
-            // TODO: move to Client
-            Console.WriteLine($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
+            _battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
         }
 
         public abstract void PerformSpecialAction();

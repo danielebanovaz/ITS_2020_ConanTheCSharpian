@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace ConanTheCSharpian.Core
 {
-    public class Battlefield
+    public class Battlefield : IMessageHandler
     {
         private HeroParty _heroes = new HeroParty();
         private MonsterParty _monsters = new MonsterParty();
+        private IMessageHandler _messageHandler;
 
         public bool IsGameFinished
         {
@@ -18,10 +19,23 @@ namespace ConanTheCSharpian.Core
             }
         }
 
+        public Battlefield(IMessageHandler messageHandler)
+        {
+            _messageHandler = messageHandler;
+        }
+
+        public void DisplayMessage(string message)
+        {
+            _messageHandler.DisplayMessage(message);
+        }
+
         public void RunBattle()
         {
+            int currentTurn = 1;
             do
             {
+                DisplayMessage($"Turn {currentTurn} is about to start:");
+
                 if (LetPartyAct(_heroes))
                     break;
 
@@ -29,6 +43,11 @@ namespace ConanTheCSharpian.Core
                     break;
 
             } while (!IsGameFinished);
+
+            if (_heroes.IsEverybodyDead())
+                DisplayMessage("Oh noes! The monsters won.");
+            else
+                DisplayMessage("Hurray! Your heroes won this battle!");
         }
 
         private bool LetPartyAct(IParty party)
@@ -42,12 +61,6 @@ namespace ConanTheCSharpian.Core
             }
 
             return false;
-        }
-
-        public void UseNextCharacter()
-        {
-            // TODO: implement that
-            throw new System.NotImplementedException();
         }
 
         internal List<Character> GetValidTargets(Character callingCharacter, TargetType targetsType)
