@@ -57,7 +57,7 @@ namespace ConanTheCSharpian.Core
         /// <summary>
         /// Battlefield in which this character acts
         /// </summary>
-        private Battlefield _battlefield;
+        protected Battlefield Battlefield { get; private set; }
 
         /// <summary>
         /// Current health of the character.
@@ -85,9 +85,9 @@ namespace ConanTheCSharpian.Core
                 if (IsDead)
                 {
                     if (this is Hero)
-                        _battlefield.DisplayMessage($"Oh no! {FullyQualifiedName} just perished.");
+                        Battlefield.DisplayMessage($"Oh no! {FullyQualifiedName} just perished.");
                     else
-                        _battlefield.DisplayMessage($"Yes! That fithy {FullyQualifiedName} has been slained.");
+                        Battlefield.DisplayMessage($"Yes! That fithy {FullyQualifiedName} has been slained.");
                 }
             }
         }
@@ -116,7 +116,7 @@ namespace ConanTheCSharpian.Core
 
         public void Initialize(Battlefield battlefield, ICharacterController controller)
         {
-            _battlefield = battlefield;
+            Battlefield = battlefield;
             _controller = controller;
             CurrentHealth = MaxHealth;
         }
@@ -133,18 +133,18 @@ namespace ConanTheCSharpian.Core
 
         public void PerformBaseAttack()
         {
-            List<Character> validTargets = _battlefield.GetValidTargets(this, TargetType.Opponents);
+            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
             int randomIndex = _random.Next(0, validTargets.Count - 1);
             Character target = validTargets[randomIndex];
 
             if (_random.NextDouble() > Accuracy)
             {
-                _battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
+                Battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
                 return;
             }
 
             target.CurrentHealth -= Damage;
-            _battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
+            Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
         }
 
         public abstract void PerformSpecialAction();
