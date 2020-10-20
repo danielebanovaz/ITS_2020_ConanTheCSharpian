@@ -25,13 +25,7 @@ namespace ConanTheCSharpian.Core
             _messageHandler = messageHandler;
         }
 
-
-        public void DisplayMessage(string message)
-        {
-            DisplayMessage(message, false);
-        }
-
-        public void DisplayMessage(string message, bool pause)
+        public void DisplayMessage(string message, bool pause = false)
         {
             _messageHandler.DisplayMessage(message, pause);
         }
