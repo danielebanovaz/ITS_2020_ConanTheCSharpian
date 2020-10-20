@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using System.Collections.Generic;
 
 namespace ConanTheCSharpian.Core
@@ -35,6 +36,17 @@ namespace ConanTheCSharpian.Core
                 aliveCharacters.Add(_mage);
 
             return aliveCharacters;
+        }
+
+        internal Character GetCharacter(CharacterType characterType)
+        {
+            switch (characterType)
+            {
+                case CharacterType.Barbarian: return _barbarian;
+                case CharacterType.Ranger: return _ranger;
+                case CharacterType.Mage: return _mage;
+                default: throw new NotSupportedException($"{characterType} is not related to this party");
+            }
         }
     }
 }
