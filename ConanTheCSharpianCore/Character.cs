@@ -118,7 +118,7 @@ namespace ConanTheCSharpian.Core
         {
             Battlefield = battlefield;
             _controller = controller;
-            CurrentHealth = MaxHealth;
+            _currentHealth = MaxHealth;
         }
 
         #region Actions
@@ -143,8 +143,8 @@ namespace ConanTheCSharpian.Core
                 return;
             }
 
-            target.CurrentHealth -= Damage;
             Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
+            target.CurrentHealth -= Damage;
         }
 
         public abstract void PerformSpecialAction();

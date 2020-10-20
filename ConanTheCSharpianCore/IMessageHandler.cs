@@ -4,6 +4,6 @@ namespace ConanTheCSharpian.Core
 {
     public interface IMessageHandler
     {
-        void DisplayMessage(string message);
+        void DisplayMessage(string message, bool pause);
     }
 }

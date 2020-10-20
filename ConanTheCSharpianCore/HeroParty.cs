@@ -10,6 +10,13 @@ namespace ConanTheCSharpian.Core
         private Ranger _ranger = new Ranger();
         private Mage _mage = new Mage();
 
+        public HeroParty(Battlefield battlefield, ICharacterController characterController)
+        {
+            _barbarian.Initialize(battlefield, characterController);
+            _ranger.Initialize(battlefield, characterController);
+            _mage.Initialize(battlefield, characterController);
+        }
+
         public bool IsEverybodyDead()
         {
             return _barbarian.IsDead && _ranger.IsDead && _mage.IsDead;

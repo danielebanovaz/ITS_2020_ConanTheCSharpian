@@ -7,9 +7,10 @@ namespace ConanTheCSharpian.Core
 {
     public class Battlefield : IMessageHandler
     {
-        private HeroParty _heroes = new HeroParty();
-        private MonsterParty _monsters = new MonsterParty();
+        private HeroParty _heroes;
+        private MonsterParty _monsters;
         private IMessageHandler _messageHandler;
+        private ICharacterController _ai = new Ai();
 
         public bool IsGameFinished
         {
@@ -24,23 +25,34 @@ namespace ConanTheCSharpian.Core
             _messageHandler = messageHandler;
         }
 
+
         public void DisplayMessage(string message)
         {
-            _messageHandler.DisplayMessage(message);
+            DisplayMessage(message, false);
+        }
+
+        public void DisplayMessage(string message, bool pause)
+        {
+            _messageHandler.DisplayMessage(message, pause);
         }
 
         public void RunBattle()
         {
+            _heroes = new HeroParty(this, _ai);
+            _monsters = new MonsterParty(this, _ai);
+
             int currentTurn = 1;
             do
             {
-                DisplayMessage($"Turn {currentTurn} is about to start:");
+                DisplayMessage($"Turn {currentTurn} is about to start:", true);
 
                 if (LetPartyAct(_heroes))
                     break;
 
                 if (LetPartyAct(_monsters))
                     break;
+
+                currentTurn++;
 
             } while (!IsGameFinished);
 
