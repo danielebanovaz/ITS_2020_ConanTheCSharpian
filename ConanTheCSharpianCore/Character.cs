@@ -114,11 +114,14 @@ namespace ConanTheCSharpian.Core
 
         #endregion Fields & Properties
 
-        public void Initialize(Battlefield battlefield, ICharacterController controller)
+        public void Initialize(Battlefield battlefield, ICharacterController controller, string customName = null)
         {
             Battlefield = battlefield;
             _controller = controller;
             _currentHealth = MaxHealth;
+
+            if (!string.IsNullOrWhiteSpace(customName))
+                Name = customName;
         }
 
         #region Actions

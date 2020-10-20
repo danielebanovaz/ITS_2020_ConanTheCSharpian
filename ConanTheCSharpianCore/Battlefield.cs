@@ -30,15 +30,18 @@ namespace ConanTheCSharpian.Core
             _messageHandler.DisplayMessage(message, pause);
         }
 
-        public void RunBattle()
+        public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController)
         {
             _heroes = new HeroParty(this, _ai);
             _monsters = new MonsterParty(this, _ai);
 
+            Character userControlledCharacter = _heroes.GetCharacter(userControlledCharacterType);
+            userControlledCharacter.Initialize(this, playerController, userControlledCharacterName);
+
             int currentTurn = 1;
             do
             {
-                DisplayMessage($"Turn {currentTurn} is about to start:", true);
+                DisplayMessage($"\n\tTurn {currentTurn} is about to start:", true);
 
                 if (LetPartyAct(_heroes))
                     break;
