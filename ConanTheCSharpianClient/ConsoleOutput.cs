@@ -11,7 +11,7 @@ namespace ConanTheCSharpian.Client
         {
             Console.WriteLine(message);
             if (pause)
-                Console.ReadLine();
+                Console.ReadKey(true);
         }
     }
 }

@@ -11,13 +11,14 @@ namespace ConanTheCSharpian.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Conan the CSharpian!");
 
             IMessageHandler consoleMessageHandler = new ConsoleOutput();
             ConsolePlayer player = new ConsolePlayer();
 
             while (true)
             {
+                DisplayGameTitle();
+
                 CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
 
@@ -25,9 +26,30 @@ namespace ConanTheCSharpian.Client
                 battlefield.RunBattle(type, name, player);
 
                 Console.WriteLine("Do you want to play again? [Y/N]");
-                if (Console.ReadKey().Key != ConsoleKey.Y)
+                if (Console.ReadKey(true).Key != ConsoleKey.Y)
                     return;
+
+                Console.Clear();
             }
+        }
+
+        private static void DisplayGameTitle()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(@"                     ___
+       .----.      __) `\      ___ ___  _ __   __ _ _ __  
+       | == |     < __=- |    / __/ _ \| '_ \ / _` | '_ \ 
+    ___| :: |___   \\ `)/    | (_| (_) | | | | (_| | | | | 
+    \  `----'  /\  (\) (      \___\___/|_| |_|\__,_|_| |_|        
+     \   `.   /( \/ /\\
+     |    :   | \  /  \\            the CSharpian
+     \   _._  /  `""   <_>
+      xxx(o)xx
+            ");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Welcome to Conan the CSharpian game!");
+            Console.ResetColor();
         }
     }
 }

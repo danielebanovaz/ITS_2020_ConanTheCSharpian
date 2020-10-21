@@ -54,9 +54,9 @@ namespace ConanTheCSharpian.Core
             } while (!IsGameFinished);
 
             if (_heroes.IsEverybodyDead())
-                DisplayMessage("Oh noes! The monsters won.");
+                DisplayMessage("\n\tOh noes! The monsters won.\n");
             else
-                DisplayMessage("Hurray! Your heroes won this battle!");
+                DisplayMessage("\n\tHurray! Your heroes won this battle!\n");
         }
 
         private bool LetPartyAct(IParty party)

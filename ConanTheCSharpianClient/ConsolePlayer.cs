@@ -47,17 +47,20 @@ namespace ConanTheCSharpian.Client
 
         public void ChooseAttackType(Character controlledCharacter)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"It's time for {controlledCharacter.FullyQualifiedName} to act. Please choose his action between [B]ase attack and [S]pecial action:");
+            Console.ResetColor();
+
             while (true)
             {
-                Console.WriteLine($"It's time for {controlledCharacter.FullyQualifiedName} to act. Please choose his action between [B]ase attack and [S]pecial action:");
-                string choice = Console.ReadLine();
-                switch (choice.ToLower())
+                ConsoleKey choice = Console.ReadKey(true).Key;
+                switch (choice)
                 {
-                    case "b":
+                    case ConsoleKey.B:
                         controlledCharacter.PerformBaseAttack();
                         return;
 
-                    case "s":
+                    case ConsoleKey.S:
                         controlledCharacter.PerformSpecialAction();
                         return;
                 }
