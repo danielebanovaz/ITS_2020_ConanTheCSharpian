@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 
 namespace ConanTheCSharpian.Core
 {
@@ -14,8 +14,19 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
-            Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
+            int randomIndex = _random.Next(0, validTargets.Count);
+            Character target = validTargets[randomIndex];
+
+            Battlefield.DisplayMessage($"{FullyQualifiedName} is charging a killer blow!");
+            if (_random.NextDouble() > Accuracy / 3)
+            {
+                Battlefield.DisplayMessage($"...but missed his attack against {target.FullyQualifiedName} like a dumbass.");
+                return;
+            }
+
+            Battlefield.DisplayMessage($"{FullyQualifiedName} hit {target.FullyQualifiedName} at full force for {Damage * 3} damage.");
+            target.CurrentHealth -= Damage * 3;
         }
     }
 }

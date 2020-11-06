@@ -8,7 +8,7 @@ namespace ConanTheCSharpian.Core
 {
     public abstract class Character
     {
-        private static Random _random = new Random();
+        protected static Random _random = new Random();
 
         #region Fields & Properties
 
@@ -72,7 +72,7 @@ namespace ConanTheCSharpian.Core
             }
 
             // Equivalent to "SetCurrentHealth(value)"
-            protected set
+            set
             {
                 if (value > MaxHealth)
                     value = MaxHealth;
@@ -137,7 +137,7 @@ namespace ConanTheCSharpian.Core
         public void PerformBaseAttack()
         {
             List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
-            int randomIndex = _random.Next(0, validTargets.Count - 1);
+            int randomIndex = _random.Next(0, validTargets.Count);
             Character target = validTargets[randomIndex];
 
             if (_random.NextDouble() > Accuracy)
