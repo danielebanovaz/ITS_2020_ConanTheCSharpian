@@ -16,6 +16,11 @@ namespace ConanTheCSharpian.Core
         {
             // TODO: implement special action logic
             Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+            Damage = Damage * 2;
+            Accuracy = Accuracy / 2;
+            PerformSpecialActionAttack();
+            Damage = 30;
+            Accuracy = 0.6f;
         }
     }
 }
