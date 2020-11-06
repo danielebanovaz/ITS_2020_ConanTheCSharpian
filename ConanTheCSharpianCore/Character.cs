@@ -72,7 +72,7 @@ namespace ConanTheCSharpian.Core
             }
 
             // Equivalent to "SetCurrentHealth(value)"
-            protected set
+             set
             {
                 if (value > MaxHealth)
                     value = MaxHealth;
