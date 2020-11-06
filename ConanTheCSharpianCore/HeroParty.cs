@@ -16,6 +16,7 @@ namespace ConanTheCSharpian.Core
             Characters.Add(new Barbarian());
             Characters.Add(new Ranger());
             Characters.Add(new Mage());
+            Characters.Add(new Paladin());
         }
     }
 }

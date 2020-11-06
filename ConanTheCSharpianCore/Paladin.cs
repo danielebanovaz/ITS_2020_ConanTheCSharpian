@@ -4,21 +4,22 @@ using System.Collections.Generic;
 
 namespace ConanTheCSharpian.Core
 {
-    public class Barbarian : Hero
+    public class Paladin : Hero
     {
-        public Barbarian()
+        public Paladin()
         {
-            Name = "Conan";
-            Damage = 30;
-            MaxHealth = 120;
-            Accuracy = 0.6f;
+            Name = "Sigmund";
+            Damage = 25;
+            MaxHealth = 100;
+            Accuracy = 0.7f;
+            MaxMana = 50;
         }
 
         public override void PerformSpecialAction()
         {
             // TODO: implement special action logic
-            DamageSp = 60;
-            AccuracySp = 0.3f;
+            DamageSp = Damage;
+            AccuracySp = Accuracy;
 
             
 
