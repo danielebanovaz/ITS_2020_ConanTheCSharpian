@@ -7,6 +7,7 @@ using ConanTheCSharpian.Core;
 
 namespace ConanTheCSharpian.Client
 {
+
     class Program
     {
         static void Main(string[] args)
@@ -22,8 +23,16 @@ namespace ConanTheCSharpian.Client
                 CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
 
+
+                Console.WriteLine("How many allies do you want?");
+                int numberOfHeroes = int.Parse(Console.ReadLine());
+
+
+                Console.WriteLine("How many opponents do you want?");
+                int numberOfMonsters = int.Parse(Console.ReadLine());
+
                 Battlefield battlefield = new Battlefield(consoleMessageHandler);
-                battlefield.RunBattle(type, name, player);
+                battlefield.RunBattle(type, name, player,numberOfHeroes, numberOfMonsters);
 
                 Console.WriteLine("Do you want to play again? [Y/N]");
                 if (Console.ReadKey(true).Key != ConsoleKey.Y)

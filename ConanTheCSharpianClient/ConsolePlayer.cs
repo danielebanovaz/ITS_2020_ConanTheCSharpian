@@ -14,7 +14,8 @@ namespace ConanTheCSharpian.Client
                 Console.WriteLine(@"Choose your character's class:
 - [B]arbarian
 - [R]anger
-- [M]age");
+- [M]age
+- [P]aladin");
                 string choice = Console.ReadLine();
                 switch (choice.ToLower())
                 {
@@ -29,6 +30,9 @@ namespace ConanTheCSharpian.Client
                     case "m":
                     case "mage":
                         return CharacterType.Mage;
+                    case "p":
+                    case "Paladin":
+                        return CharacterType.Paladin;
                 }
             }
         }
@@ -61,7 +65,9 @@ namespace ConanTheCSharpian.Client
                         return;
 
                     case ConsoleKey.S:
+        
                         controlledCharacter.PerformSpecialAction();
+               
                         return;
                 }
 

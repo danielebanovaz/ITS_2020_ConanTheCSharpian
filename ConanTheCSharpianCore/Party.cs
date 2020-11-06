@@ -10,15 +10,15 @@ namespace ConanTheCSharpian.Core
     {
         protected List<TCharacter> Characters = new List<TCharacter>();
 
-        public Party(Battlefield battlefield, ICharacterController characterController)
+        public Party(Battlefield battlefield, ICharacterController characterController, int numberOfHeroes)
         {
-            CreateCharacterInstances();
+            CreateCharacterInstances(numberOfHeroes);
 
             foreach (Character characterToInitialize in Characters)
                 characterToInitialize.Initialize(battlefield, characterController);
         }
 
-        protected abstract void CreateCharacterInstances();
+        protected abstract void CreateCharacterInstances(int numberOfHeroes);
 
         public bool IsEverybodyDead()
         {

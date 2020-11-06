@@ -11,7 +11,7 @@ namespace ConanTheCSharpian.Core
         private MonsterParty _monsters;
         private IMessageHandler _messageHandler;
         private ICharacterController _ai = new Ai();
-
+        public  bool PaladinEffect { get; set; }
         public bool IsGameFinished
         {
             get
@@ -30,10 +30,10 @@ namespace ConanTheCSharpian.Core
             _messageHandler.DisplayMessage(message, pause);
         }
 
-        public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController)
+        public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController,int numberOfHeroes,int numberOfMonsters)
         {
-            _heroes = new HeroParty(this, _ai);
-            _monsters = new MonsterParty(this, _ai);
+            _heroes = new HeroParty(this, _ai,numberOfHeroes);
+            _monsters = new MonsterParty(this, _ai, numberOfMonsters);
 
             Character userControlledCharacter = _heroes[userControlledCharacterType];
             userControlledCharacter.Initialize(this, playerController, userControlledCharacterName);
@@ -48,7 +48,7 @@ namespace ConanTheCSharpian.Core
 
                 if (LetPartyAct(_monsters))
                     break;
-
+                if (PaladinEffect == true) isPaladinEffectFinished();
                 currentTurn++;
 
             } while (!IsGameFinished);
@@ -72,7 +72,7 @@ namespace ConanTheCSharpian.Core
             return false;
         }
 
-        internal List<Character> GetValidTargets(Character callingCharacter, TargetType targetsType)
+        public List<Character> GetValidTargets(Character callingCharacter, TargetType targetsType)
         {
             List<Character> validTargets = new List<Character>();
 
@@ -107,7 +107,39 @@ namespace ConanTheCSharpian.Core
 
             return validTargets;
         }
+
+
+
+        public void isPaladinEffectFinished()
+        {
+            List<Character> Allies = _heroes.GetAliveCharacters();
+            bool resetStatuts = false;
+
+            
+            foreach (Character hero in Allies) 
+            {
+                if(hero.UsedPaladinEffect == true) 
+                {
+                    resetStatuts = true;
+                }
+                else
+                {
+                    resetStatuts = false;
+                    break;
+                }
+            }
+
+            if (resetStatuts == true) PaladinEffect = false;
+            else PaladinEffect = true;
+
+        }
+
+
+
     }
+
+    
+
 
     public enum TargetType { Allies, Opponents, All }
 }
