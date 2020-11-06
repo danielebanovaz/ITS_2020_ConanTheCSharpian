@@ -14,7 +14,8 @@ namespace ConanTheCSharpian.Client
                 Console.WriteLine(@"Choose your character's class:
 - [B]arbarian
 - [R]anger
-- [M]age");
+- [M]age
+- [P]aladin");      //ASSIGNMENT #3
                 string choice = Console.ReadLine();
                 switch (choice.ToLower())
                 {
@@ -29,6 +30,12 @@ namespace ConanTheCSharpian.Client
                     case "m":
                     case "mage":
                         return CharacterType.Mage;
+                    
+                    //ASSIGNMENT #3
+                    case "p":
+                    case "paladin":
+                        return CharacterType.Paladin;
+                    //
                 }
             }
         }
@@ -68,5 +75,25 @@ namespace ConanTheCSharpian.Client
                 Console.WriteLine("Invalid option. Please digit 'B' for Base attack and 'S' for Special action");
             }
         }
+
+        
+        // ASSIGNMENT #1
+        public int ChooseHeroesNumber()
+        {
+            int numOfAllies;
+            Console.WriteLine("How many allies do you want?");
+            numOfAllies = Convert.ToInt32(Console.ReadLine());
+            return numOfAllies;
+        }
+
+        public int ChooseMonstersNumber()
+        {
+            int numOfEnemies;
+            Console.WriteLine("How many monsters do you want?");
+            numOfEnemies = Convert.ToInt32(Console.ReadLine());
+            return numOfEnemies;
+        }
+        
+
     }
 }

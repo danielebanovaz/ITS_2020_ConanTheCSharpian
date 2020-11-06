@@ -160,9 +160,11 @@ namespace ConanTheCSharpian.Core
         Barbarian,
         Ranger,
         Mage,
+        Paladin, // ASSIGNMENT #3
         Troll,
         Goblin,
-        Warlock
+        Warlock,
+        Necromancer // ASSIGNMENT #3
     }
 
 }
