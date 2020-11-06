@@ -36,12 +36,22 @@ namespace ConanTheCSharpian.Core
         /// <summary>
         /// Maximum health available to the Character
         /// </summary>
-        protected float MaxHealth;
+        protected float MaxHealth;      
 
         /// <summary>
         /// Current health of the Character
         /// </summary>
         private float _currentHealth;
+
+        /// <summary>
+        /// Maximum mana available to the Character - used to cast spells-
+        /// </summary>
+        protected int MaxMana;
+
+        /// <summary>
+        /// Current mana of the Character - used to cast spells-
+        /// </summary>
+        protected int _currentMana;
 
         /// <summary>
         /// Chance of successfully hitting an opponent during an attack
@@ -72,7 +82,7 @@ namespace ConanTheCSharpian.Core
             }
 
             // Equivalent to "SetCurrentHealth(value)"
-            protected set
+            set                                         //HO TOLTO IL PROTECTED DAL SET, PER POTERVI ACCEDERE DALLE CLASSI
             {
                 if (value > MaxHealth)
                     value = MaxHealth;
@@ -162,7 +172,10 @@ namespace ConanTheCSharpian.Core
         Mage,
         Troll,
         Goblin,
-        Warlock
+        Warlock,
+        Paladin,
+        Necromancer,
+        Skeleton
     }
 
 }
