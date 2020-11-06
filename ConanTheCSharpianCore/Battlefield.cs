@@ -1,14 +1,13 @@
-﻿
-
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ConanTheCSharpian.Core
 {
     public class Battlefield : IMessageHandler
     {
         private HeroParty _heroes;
+        private int NumberOfHeroPartyMembers;
         private MonsterParty _monsters;
+        private int NumberOfMonsterPartyMembers;
         private IMessageHandler _messageHandler;
         private ICharacterController _ai = new Ai();
 
@@ -20,9 +19,16 @@ namespace ConanTheCSharpian.Core
             }
         }
 
-        public Battlefield(IMessageHandler messageHandler)
+        public void CreateSkeleton()
+        {
+            _monsters.Characters.Insert(0, new Skeleton());
+        }
+
+        public Battlefield(IMessageHandler messageHandler, int numberOfHeroPartyMembers, int numberOfMonsterPartyMembers)
         {
             _messageHandler = messageHandler;
+            NumberOfHeroPartyMembers = numberOfHeroPartyMembers;
+            NumberOfMonsterPartyMembers = numberOfMonsterPartyMembers;
         }
 
         public void DisplayMessage(string message, bool pause = false)
@@ -32,8 +38,8 @@ namespace ConanTheCSharpian.Core
 
         public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController)
         {
-            _heroes = new HeroParty(this, _ai);
-            _monsters = new MonsterParty(this, _ai);
+            _heroes = new HeroParty(this, _ai, NumberOfHeroPartyMembers);
+            _monsters = new MonsterParty(this, _ai, NumberOfMonsterPartyMembers);
 
             Character userControlledCharacter = _heroes[userControlledCharacterType];
             userControlledCharacter.Initialize(this, playerController, userControlledCharacterName);
@@ -42,7 +48,14 @@ namespace ConanTheCSharpian.Core
             do
             {
                 DisplayMessage($"\n\tTurn {currentTurn} is about to start:", true);
-
+                foreach (Monster monster in _monsters.Characters)
+                {
+                    monster.CurrentMana += 10;
+                }
+                foreach (Hero hero in _heroes.Characters)
+                {
+                    hero.CurrentMana += 10;
+                }
                 if (LetPartyAct(_heroes))
                     break;
 

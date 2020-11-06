@@ -1,9 +1,10 @@
-﻿
+﻿using System;
 
 namespace ConanTheCSharpian.Core
 {
     public class Troll : Monster
     {
+        private static Random _random = new Random();
         public Troll()
         {
             Name = "Durgh";
@@ -14,8 +15,20 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
-            Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+            float _damageForThisAction = Damage * 3f;
+            float _accuracyForThisAction = Accuracy * 0.33f;
+
+            Character target = ChooseTarget();
+
+            if (_random.NextDouble() > _accuracyForThisAction)
+            {
+                Battlefield.DisplayMessage($"{FullyQualifiedName} missed his special attack against {target.FullyQualifiedName}.");
+                return;
+            }
+
+            Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} with his SPECIAL ATTACK for {_damageForThisAction} damage.");
+            //target.CurrentHealth -= _damageForThisAction;
+            ReduceTargetHealth(target, _damageForThisAction);
         }
     }
 }

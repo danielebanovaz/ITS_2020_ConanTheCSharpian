@@ -33,6 +33,23 @@ namespace ConanTheCSharpian.Client
             }
         }
 
+        public int ChooseHeroPartyNumber()
+        {
+            Console.WriteLine("How many Allies do you want?");
+            int choice = int.Parse(Console.ReadLine());
+            return choice+1;
+        }
+        public int ChooseMonsterPartyNumber()
+        {
+            while (true)
+            {
+                Console.WriteLine("How many Enemies do you want?");
+                int choice = int.Parse(Console.ReadLine());
+                if (choice > 0)
+                    return choice;
+            }
+        }
+
         public string ChooseHeroName()
         {
             string name;

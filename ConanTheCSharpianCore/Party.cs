@@ -8,11 +8,12 @@ namespace ConanTheCSharpian.Core
     public abstract class Party<TCharacter> : IParty
         where TCharacter : Character
     {
-        protected List<TCharacter> Characters = new List<TCharacter>();
+        public List<TCharacter> Characters = new List<TCharacter>();
 
-        public Party(Battlefield battlefield, ICharacterController characterController)
+        public Party(Battlefield battlefield, ICharacterController characterController, int numberOfMembers)
         {
-            CreateCharacterInstances();
+            for ( int i = 0; i < numberOfMembers; i++)
+                CreateCharacterInstances();
 
             foreach (Character characterToInitialize in Characters)
                 characterToInitialize.Initialize(battlefield, characterController);
