@@ -15,12 +15,15 @@ namespace ConanTheCSharpian.Client
             IMessageHandler consoleMessageHandler = new ConsoleOutput();
             ConsolePlayer player = new ConsolePlayer();
 
+
             while (true)
             {
                 DisplayGameTitle();
 
                 CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
+                int number1 = player.NumberOfAllies();
+                int number2 = player.NumberOfMonster();
 
                 Battlefield battlefield = new Battlefield(consoleMessageHandler);
                 battlefield.RunBattle(type, name, player);

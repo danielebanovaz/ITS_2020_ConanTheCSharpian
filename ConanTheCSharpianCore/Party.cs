@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 
 namespace ConanTheCSharpian.Core
 {
@@ -51,5 +52,20 @@ namespace ConanTheCSharpian.Core
                 throw new NotSupportedException($"{characterType} is not related to this party");
             }
         }
+        private static Random random = new Random();
+
+        private static int NumberOfAllies()
+        {
+            return random.Next(1, 4);
+        }
+
+        private static int NumberOfMonster()
+        {
+            return random.Next(1, 4);
+        }
+
+
+
+
     }
 }
