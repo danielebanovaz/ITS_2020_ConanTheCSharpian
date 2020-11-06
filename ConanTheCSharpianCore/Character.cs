@@ -72,7 +72,7 @@ namespace ConanTheCSharpian.Core
             }
 
             // Equivalent to "SetCurrentHealth(value)"
-            protected set
+             set
             {
                 if (value > MaxHealth)
                     value = MaxHealth;
@@ -112,6 +112,11 @@ namespace ConanTheCSharpian.Core
             }
         }
 
+        public bool UsedPaladinEffect = false;
+        
+        public int CurrentMana { get;  set;}
+
+        public int MaxMana { get;  set; }
         #endregion Fields & Properties
 
         public void Initialize(Battlefield battlefield, ICharacterController controller, string customName = null)
@@ -136,10 +141,22 @@ namespace ConanTheCSharpian.Core
 
         public void PerformBaseAttack()
         {
+            if (this.Category == CharacterType.Paladin)
+            {
+                if(CurrentMana<MaxMana) CurrentMana += 10;
+            
+            }
+
             List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
+            
             int randomIndex = _random.Next(0, validTargets.Count - 1);
             Character target = validTargets[randomIndex];
-
+            if (this.UsedPaladinEffect = false && Battlefield.PaladinEffect == true) 
+            { 
+                this.Damage = this.Damage * 1.75f;
+                this.UsedPaladinEffect = true;
+            } 
+            
             if (_random.NextDouble() > Accuracy)
             {
                 Battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
@@ -148,21 +165,30 @@ namespace ConanTheCSharpian.Core
 
             Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
             target.CurrentHealth -= Damage;
+
+            if (this.UsedPaladinEffect = true && Battlefield.PaladinEffect == true)
+            {
+                Damage = Damage / 1.75f;
+            }
         }
 
+
+       
         public abstract void PerformSpecialAction();
 
         #endregion Actions
     }
-
+   
     public enum CharacterType
     {
         Barbarian,
         Ranger,
         Mage,
+        Paladin,
         Troll,
         Goblin,
         Warlock
     }
 
+    
 }

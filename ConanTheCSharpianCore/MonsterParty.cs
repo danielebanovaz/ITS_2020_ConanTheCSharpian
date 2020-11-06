@@ -7,15 +7,26 @@ namespace ConanTheCSharpian.Core
 {
     public class MonsterParty : Party<Monster>
     {
-        public MonsterParty(Battlefield battlefield, ICharacterController characterController)
-               : base(battlefield, characterController)
+        public MonsterParty(Battlefield battlefield, ICharacterController characterController, int numerOfMonster)
+               : base(battlefield, characterController, numerOfMonster)
         { }
 
-        protected override void CreateCharacterInstances()
+        protected override void CreateCharacterInstances(int numerOfMonster)
         {
-            Characters.Add(new Goblin());
-            Characters.Add(new Troll());
-            Characters.Add(new Warlock());
+            Random random = new Random();
+            int choosenMonster;
+            for (int i = 0; i < numerOfMonster; i++)
+            {
+               choosenMonster = random.Next(1, 4);
+                 switch (choosenMonster)
+                {
+                    case (1): Characters.Add(new Troll()); break;
+                    case (2): Characters.Add(new Goblin()); break;
+                    case (3): Characters.Add(new Warlock()); break;
+                    default: throw new NotImplementedException();
+                }
+
+            }
         }
     }
 }
