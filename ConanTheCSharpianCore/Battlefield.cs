@@ -11,7 +11,6 @@ namespace ConanTheCSharpian.Core
         private MonsterParty _monsters;
         private IMessageHandler _messageHandler;
         private ICharacterController _ai = new Ai();
-
         public bool IsGameFinished
         {
             get
@@ -32,6 +31,10 @@ namespace ConanTheCSharpian.Core
 
         public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController)
         {
+            //Console.WriteLine("How many allies you want?");
+            //int allies = int.Parse(Console.ReadLine());
+            // Console.WriteLine("How many monsters you want?");
+            // monsters = int.Parse(Console.ReadLine());
             _heroes = new HeroParty(this, _ai);
             _monsters = new MonsterParty(this, _ai);
 
