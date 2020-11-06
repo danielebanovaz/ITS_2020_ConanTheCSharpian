@@ -21,6 +21,8 @@ namespace ConanTheCSharpian.Client
 
                 CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
+                //int numberOfAllies = player.ChooseNumberOfAllies();
+                //int numberOfAllies = player.ChooseNumberOfMonsters();
 
                 Battlefield battlefield = new Battlefield(consoleMessageHandler);
                 battlefield.RunBattle(type, name, player);
