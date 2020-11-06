@@ -6,7 +6,6 @@ namespace ConanTheCSharpian.Core
     {
         public Troll()
         {
-            Name = "Durgh";
             Damage = 50;
             MaxHealth = 160;
             Accuracy = 0.3f;
@@ -14,8 +13,7 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
-            Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+            Attack(GetRandomCharacter(), Damage * 3, Accuracy / 3, "Special attack: ");
         }
     }
 }

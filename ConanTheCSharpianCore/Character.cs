@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,14 +9,14 @@ namespace ConanTheCSharpian.Core
 {
     public abstract class Character
     {
-        private static Random _random = new Random();
+        protected static Random Random = new Random();
 
         #region Fields & Properties
 
         /// <summary>
         /// Name of the Character
         /// </summary>
-        public string Name { get; protected set; } // We changed it into a property to give public read access and mantain protected write access
+        public string Name { get; private set; } // We changed it into a property to give public read access and mantain private write access
 
 
         // ^^^^ This property is written in a compact form; it's equivalent to:
@@ -24,7 +25,7 @@ namespace ConanTheCSharpian.Core
         // public string VerboseNameProperty
         // {
         //     get { return _verboseNameProperty; }
-        //     protected set { _verboseNameProperty = value; }
+        //     private set { _verboseNameProperty = value; }
         // }
 
 
@@ -72,7 +73,7 @@ namespace ConanTheCSharpian.Core
             }
 
             // Equivalent to "SetCurrentHealth(value)"
-            protected set
+            set
             {
                 if (value > MaxHealth)
                     value = MaxHealth;
@@ -120,8 +121,10 @@ namespace ConanTheCSharpian.Core
             _controller = controller;
             _currentHealth = MaxHealth;
 
-            if (!string.IsNullOrWhiteSpace(customName))
-                Name = customName;
+            if (string.IsNullOrWhiteSpace(customName))
+                customName = GetRandomName();
+
+            Name = customName;
         }
 
         #region Actions
@@ -136,23 +139,47 @@ namespace ConanTheCSharpian.Core
 
         public void PerformBaseAttack()
         {
-            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
-            int randomIndex = _random.Next(0, validTargets.Count - 1);
-            Character target = validTargets[randomIndex];
+            Attack(GetRandomCharacter(), Damage, Accuracy);
+        }
 
-            if (_random.NextDouble() > Accuracy)
+        protected Character GetRandomCharacter(TargetType targetType = TargetType.Opponents)
+        {
+            List<Character> validTargets = Battlefield.GetValidTargets(this, targetType);
+            return Helpers.GetRandomElement(validTargets);
+        }
+
+        protected void Attack(Character target, float damage, float accuracy, string messagePrefix = null)
+        {
+            if (Random.NextDouble() > accuracy)
             {
-                Battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
+                Battlefield.DisplayMessage($"{messagePrefix}{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
                 return;
             }
 
-            Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
-            target.CurrentHealth -= Damage;
+            Battlefield.DisplayMessage($"{messagePrefix}{FullyQualifiedName} attacked {target.FullyQualifiedName} for {damage} damage.");
+            target.CurrentHealth -= damage;
         }
 
         public abstract void PerformSpecialAction();
 
         #endregion Actions
+
+        private string GetRandomName()
+        {
+            string name = Helpers.GetRandomElement(_fantasyNames);
+            _fantasyNames.Remove(name);
+            return name;
+        }
+
+        public override string ToString()
+        {
+            return FullyQualifiedName;
+        }
+
+        private static List<string> _fantasyNames = new List<string>()
+        {
+        "Lydan", "Syrin", "Ptorik", "Joz", "Varog", "Gethrod", "Hezra", "Feron", "Ophni", "Colborn", "Fintis", "Gatlin", "Jinto", "Hagalbar", "Krinn", "Lenox", "Revvyn", "Hodus", "Dimian", "Paskel", "Kontas", "Weston", "Azamarr", "Jather", "Tekren", "Jareth", "Adon", "Zaden", "Eune", "Graff", "Tez", "Jessop", "Gunnar", "Pike", "Domnhar", "Baske", "Jerrick", "Mavrek", "Riordan", "Wulfe", "Straus", "Tyvrik", "Henndar", "Favroe", "Whit", "Jaris", "Renham", "Kagran", "Lassrin", "Vadim", "Arlo", "Quintis", "Vale", "Caelan", "Yorjan", "Khron", "Ishmael", "Jakrin", "Fangar", "Roux", "Baxar", "Hawke", "Gatlen", "Barak", "Nazim", "Kadric", "Paquin", "Kent", "Moki", "Rankar", "Lothe", "Ryven", "Clawsen", "Pakker", "Embre", "Cassian", "Verssek", "Dagfinn", "Ebraheim", "Nesso", "Eldermar", "Rivik", "Rourke", "Barton", "Hemm", "Sarkin", "Blaiz", "Talon", "Agro", "Zagaroth", "Turrek", "Esdel", "Lustros", "Zenner", "Baashar", "Dagrod", "Gentar", "Feston", "Syrana", "Resha", "Varin", "Wren", "Yuni", "Talis", "Kessa", "Magaltie", "Aeris", "Desmina", "Krynna", "Asralyn", "Herra", "Pret", "Kory", "Afia", "Tessel", "Rhiannon", "Zara", "Jesi", "Belen", "Rei", "Ciscra", "Temy", "Renalee", "Estyn", "Maarika", "Lynorr", "Tiv", "Annihya", "Semet", "Tamrin", "Antia", "Reslyn", "Basak", "Vixra", "Pekka", "Xavia", "Beatha", "Yarri", "Liris", "Sonali", "Razra", "Soko", "Maeve", "Everen", "Yelina", "Morwena", "Hagar", "Palra", "Elysa", "Sage", "Ketra", "Lynx", "Agama", "Thesra", "Tezani", "Ralia", "Esmee", "Heron", "Naima", "Rydna", "Sparrow", "Baakshi", "Ibera", "Phlox", "Dessa", "Braithe", "Taewen", "Larke", "Silene", "Phressa", "Esther", "Anika", "Rasy", "Harper", "Indie", "Vita", "Drusila", "Minha", "Surane", "Lassona", "Merula", "Kye", "Jonna", "Lyla", "Zet", "Orett", "Naphtalia", "Turi", "Rhays", "Shike", "Hartie", "Beela", "Leska", "Vemery", "Lunex", "Fidess", "Tisette", "Partha"
+        };
     }
 
     public enum CharacterType
@@ -164,5 +191,4 @@ namespace ConanTheCSharpian.Core
         Goblin,
         Warlock
     }
-
 }

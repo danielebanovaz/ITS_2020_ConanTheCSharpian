@@ -13,11 +13,9 @@ namespace ConanTheCSharpian.Core
 
         public Party(Battlefield battlefield, ICharacterController characterController, int amountToCreate)
         {
-            Random randomGenerator = new Random();
             for (int i = 0; i < amountToCreate; i++)
             {
-                int randomIndex = randomGenerator.Next(0, AllowedCharacterTypes.Count);
-                CharacterType randomType = AllowedCharacterTypes[randomIndex];
+                CharacterType randomType = Helpers.GetRandomElement(AllowedCharacterTypes);
                 CreateNewCharacter(randomType, characterController, battlefield);
             }
         }

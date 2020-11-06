@@ -6,7 +6,6 @@ namespace ConanTheCSharpian.Core
     {
         public Goblin()
         {
-            Name = "Creld";
             Damage = 20;
             MaxHealth = 85;
             Accuracy = 0.8f;
@@ -14,8 +13,7 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
-            Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+            Attack(GetRandomCharacter(), Damage * 0.75f, Accuracy * 2, "Special attack: ");
         }
     }
 }

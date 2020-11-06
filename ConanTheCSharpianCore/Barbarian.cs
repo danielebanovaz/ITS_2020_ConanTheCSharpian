@@ -6,7 +6,6 @@ namespace ConanTheCSharpian.Core
     {
         public Barbarian()
         {
-            Name = "Conan";
             Damage = 30;
             MaxHealth = 120;
             Accuracy = 0.6f;
@@ -14,8 +13,7 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
-            Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+            Attack(GetRandomCharacter(), Damage * 2, Accuracy / 2, "Special attack: ");
         }
     }
 }
