@@ -150,7 +150,21 @@ namespace ConanTheCSharpian.Core
             target.CurrentHealth -= Damage;
         }
 
-        public abstract void PerformSpecialAction();
+        public  void PerformSpecialAction()
+        {
+            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
+            int randomIndex = _random.Next(0, validTargets.Count - 1);
+            Character target = validTargets[randomIndex];
+
+            if (_random.NextDouble() > Accuracy)
+            {
+                Battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
+                return;
+            }
+
+            Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
+            target.CurrentHealth -= Damage;
+        }
 
         #endregion Actions
     }
