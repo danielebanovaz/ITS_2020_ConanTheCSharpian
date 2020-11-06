@@ -49,6 +49,12 @@ namespace ConanTheCSharpian.Core
         /// </summary>
         protected float Accuracy;
 
+
+        //The mana for the new monsters
+        //
+        //
+        protected float Maxmana;
+
         /// <summary>
         /// Character controller currently in charge of controlling this character
         /// </summary>
@@ -149,8 +155,23 @@ namespace ConanTheCSharpian.Core
             Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
             target.CurrentHealth -= Damage;
         }
-
         public abstract void PerformSpecialAction();
+        public void PerformSpecialActionAttack() //attack special for goblin barbarian and troll
+        {
+            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
+            int randomIndex = _random.Next(0, validTargets.Count - 1);
+            Character target = validTargets[randomIndex];
+
+            if (_random.NextDouble() > Accuracy)
+            {
+                Battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
+                return;
+            }
+
+            Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
+            target.CurrentHealth -= Damage;
+        }
+
 
         #endregion Actions
     }

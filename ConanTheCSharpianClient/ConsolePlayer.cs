@@ -45,6 +45,30 @@ namespace ConanTheCSharpian.Client
             return name;
         }
 
+        public  string ChooseNumberAllies()
+        {
+            string numberallies;
+            do
+            {
+                Console.WriteLine("Choose how many allies you want to play :");
+                numberallies = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(numberallies));
+
+            return numberallies;
+        }
+
+        public string ChooseNumberMonster()
+        {
+            string numbermonster;
+            do
+            {
+                Console.WriteLine("Choose how many monsters to play:");
+                numbermonster = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(numbermonster) || numbermonster=="0");
+
+            return numbermonster;
+        }
+
         public void ChooseAttackType(Character controlledCharacter)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
