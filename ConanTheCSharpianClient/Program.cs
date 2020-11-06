@@ -19,7 +19,7 @@ namespace ConanTheCSharpian.Client
             {
                 DisplayGameTitle();
 
-                CharacterType type = player.ChooseHeroCategory();
+                Character.CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
 
                 Battlefield battlefield = new Battlefield(consoleMessageHandler);

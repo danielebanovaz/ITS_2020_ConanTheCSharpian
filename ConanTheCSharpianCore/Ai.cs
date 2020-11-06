@@ -12,10 +12,12 @@ namespace ConanTheCSharpian.Core
         {
             int randomDiceRoll = _random.Next(1, 10);
 
-            if (randomDiceRoll <= 3)
+            if (randomDiceRoll <= 4)
                 controlledCharacter.PerformSpecialAction();
+            
             else
                 controlledCharacter.PerformBaseAttack();
+            
         }
     }
 }
