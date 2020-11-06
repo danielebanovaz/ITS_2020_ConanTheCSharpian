@@ -45,6 +45,38 @@ namespace ConanTheCSharpian.Client
             return name;
         }
 
+        public int ChooseHowManyAllies(int minimum)
+        {
+            return AmountOfFighters(0, "How many allies do you want to play with?");
+        }
+
+        public int ChooseHowManyMonsters(int minimum)
+        {
+            return AmountOfFighters(1, "How many monsters do you want to play against?");
+        }
+
+        public int AmountOfFighters(int minimum, string question)
+        {
+            int amount = -1;
+            do
+            {
+                Console.WriteLine(question);
+                try
+                {
+                    amount = Int32.Parse(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Insert whole numbers only");
+                    continue;
+                }
+                if (amount < minimum)
+                    Console.WriteLine($"The number can't be less than {minimum}");
+            } while (amount < minimum);
+
+            return amount;
+        }
+
         public void ChooseAttackType(Character controlledCharacter)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
