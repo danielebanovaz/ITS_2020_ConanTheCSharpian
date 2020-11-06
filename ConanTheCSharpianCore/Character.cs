@@ -8,7 +8,7 @@ namespace ConanTheCSharpian.Core
 {
     public abstract class Character
     {
-        private static Random _random = new Random();
+        public  Random _random = new Random();
 
         #region Fields & Properties
 
@@ -72,7 +72,7 @@ namespace ConanTheCSharpian.Core
             }
 
             // Equivalent to "SetCurrentHealth(value)"
-            protected set
+             set
             {
                 if (value > MaxHealth)
                     value = MaxHealth;

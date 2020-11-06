@@ -22,11 +22,11 @@ namespace ConanTheCSharpian.Client
                 CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
                 int alliesNumber = player.AlliesNumber();
-                int monster = player.MonstersNumber();
+                int monsterNumber = player.MonstersNumber();
                 
 
                 Battlefield battlefield = new Battlefield(consoleMessageHandler);
-                battlefield.RunBattle(type, name, player);
+                battlefield.RunBattle(type, name, player,alliesNumber,monsterNumber);
 
 
                 Console.WriteLine("Do you want to play again? [Y/N]");

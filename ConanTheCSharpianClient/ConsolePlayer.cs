@@ -75,22 +75,33 @@ namespace ConanTheCSharpian.Client
 
         public int AlliesNumber()
         {
-          
-            List<HeroParty> allies = new List<HeroParty>();
+            int number = 0;
+            do
+            {
                 Console.WriteLine("how many allies you want to play with:");
-               int number= int.Parse(Console.ReadLine());
-           // for (int i = 0; i < number; i++){ ChooseHeroCategory();}
+           // number = int.Parse(Console.ReadLine());
+            
+                number = int.Parse(Console.ReadLine());
+                if(number < 0)
+                Console.WriteLine("il minimo è 0.Please choose another number more than or equals a 0");
+               
+
+            } while (number < 0);
+            
             return number;
         }
         public int MonstersNumber()
         {
-
-            Console.WriteLine("how many monsters you want to play against:");
-            int number = int.Parse(Console.ReadLine());
+            int number = 0;
+            do
+            {
+                Console.WriteLine("how many monsters you want to play against:");
+                number = int.Parse(Console.ReadLine());
+                if(number < 1)
+                Console.WriteLine("il minimo è 1.Please choose another number more than or equals a 1");
+                
+            } while (number < 1);
             return number;
-
-
         }
-
     }
 }
