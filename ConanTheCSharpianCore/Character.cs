@@ -41,7 +41,7 @@ namespace ConanTheCSharpian.Core
         /// <summary>
         /// Current health of the Character
         /// </summary>
-        private float _currentHealth;
+        public float _currentHealth;
 
         /// <summary>
         /// Chance of successfully hitting an opponent during an attack
@@ -72,7 +72,7 @@ namespace ConanTheCSharpian.Core
             }
 
             // Equivalent to "SetCurrentHealth(value)"
-            protected set
+            set
             {
                 if (value > MaxHealth)
                     value = MaxHealth;
@@ -150,7 +150,7 @@ namespace ConanTheCSharpian.Core
             target.CurrentHealth -= Damage;
         }
 
-        public abstract void PerformSpecialAction();
+        public abstract void PerformSpecialAction(); 
 
         #endregion Actions
     }
