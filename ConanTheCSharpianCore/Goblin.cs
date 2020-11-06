@@ -12,10 +12,13 @@ namespace ConanTheCSharpian.Core
             Accuracy = 0.8f;
         }
 
-        public override void PerformSpecialAction()
+        public void PerformSpecialAction()
         {
             // TODO: implement special action logic
-            Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+
+            Damage = 20 * 0.75f;
+            Accuracy = 1;
+            //Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
         }
     }
 }

@@ -33,6 +33,46 @@ namespace ConanTheCSharpian.Client
             }
         }
 
+        public int HowManyAllies()
+        {
+            string input;
+            int alliesNumber;
+            do
+            {
+                Console.WriteLine("Choose how many Allies do you want to play with: ");
+                input = Console.ReadLine();
+                try
+                {
+                    alliesNumber = Convert.ToInt32(input);
+                }catch(Exception e)
+                {
+                    alliesNumber = 0;
+                }
+                
+            }while(alliesNumber < 1);
+            return alliesNumber;
+        }
+
+        public int HowManyMonster()
+        {
+            string input;
+            int monstersNumber;
+            do
+            {
+                Console.WriteLine("Choose how many Monsters do you want to play against: ");
+                input = Console.ReadLine();
+                try
+                {
+                    monstersNumber = Convert.ToInt32(input);
+                }catch(Exception e)
+                {
+                    monstersNumber = 0;
+                }
+                
+            }while(monstersNumber < 1);
+            return monstersNumber;
+        }
+
         public string ChooseHeroName()
         {
             string name;
