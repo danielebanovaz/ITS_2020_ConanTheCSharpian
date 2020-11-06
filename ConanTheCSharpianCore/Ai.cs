@@ -8,14 +8,14 @@ namespace ConanTheCSharpian.Core
     {
         private Random _random = new Random();
 
-        public void ChooseAttackType(Character controlledCharacter)
+        public AttackType ChooseAttackType(Character controlledCharacter)
         {
             int randomDiceRoll = _random.Next(1, 10);
 
             if (randomDiceRoll <= 3)
-                controlledCharacter.PerformSpecialAction();
+                return AttackType.BaseAttack;
             else
-                controlledCharacter.PerformBaseAttack();
+                return AttackType.SpecialAction;
         }
     }
 }

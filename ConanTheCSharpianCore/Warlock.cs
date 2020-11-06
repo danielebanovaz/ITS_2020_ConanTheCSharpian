@@ -14,7 +14,7 @@ namespace ConanTheCSharpian.Core
             Accuracy = 0.7f;
         }
 
-        public override void PerformSpecialAction()
+        protected override void PerformSpecialAction()
         {
             bool success = Random.NextDouble() > 0.5f;
             TargetType targetType = success ? TargetType.Opponents : TargetType.Allies;

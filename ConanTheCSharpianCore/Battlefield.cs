@@ -7,16 +7,16 @@ namespace ConanTheCSharpian.Core
 {
     public class Battlefield : IMessageHandler
     {
-        private HeroParty _heroes;
-        private MonsterParty _monsters;
+        public HeroParty Heroes { get; private set; }
+        public MonsterParty Monsters { get; private set; }
         private IMessageHandler _messageHandler;
-        private ICharacterController _ai = new Ai();
+        public ICharacterController AiController { get; private set; }
 
         public bool IsGameFinished
         {
             get
             {
-                return _heroes.IsEverybodyDead() || _monsters.IsEverybodyDead();
+                return Heroes.IsEverybodyDead() || Monsters.IsEverybodyDead();
             }
         }
 
@@ -32,10 +32,11 @@ namespace ConanTheCSharpian.Core
 
         public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController, int alliesAmount, int monstersAmount)
         {
-            _heroes = new HeroParty(this, userControlledCharacterType, userControlledCharacterName, playerController, alliesAmount, _ai);
-            _monsters = new MonsterParty(this, monstersAmount, _ai);
+            AiController = new Ai();
+            Heroes = new HeroParty(this, userControlledCharacterType, userControlledCharacterName, playerController, alliesAmount, AiController);
+            Monsters = new MonsterParty(this, monstersAmount, AiController);
 
-            Character userControlledCharacter = _heroes[userControlledCharacterType];
+            Character userControlledCharacter = Heroes[userControlledCharacterType];
             userControlledCharacter.Initialize(this, playerController, userControlledCharacterName);
 
             int currentTurn = 1;
@@ -43,17 +44,17 @@ namespace ConanTheCSharpian.Core
             {
                 DisplayMessage($"\n\tTurn {currentTurn} is about to start:", true);
 
-                if (LetPartyAct(_heroes))
+                if (LetPartyAct(Heroes))
                     break;
 
-                if (LetPartyAct(_monsters))
+                if (LetPartyAct(Monsters))
                     break;
 
                 currentTurn++;
 
             } while (!IsGameFinished);
 
-            if (_heroes.IsEverybodyDead())
+            if (Heroes.IsEverybodyDead())
                 DisplayMessage("\n\tOh noes! The monsters won.\n");
             else
                 DisplayMessage("\n\tHurray! Your heroes won this battle!\n");
@@ -81,13 +82,13 @@ namespace ConanTheCSharpian.Core
 
             if (callingCharacter is Hero)
             {
-                allies = _heroes;
-                opponents = _monsters;
+                allies = Heroes;
+                opponents = Monsters;
             }
             else
             {
-                allies = _monsters;
-                opponents = _heroes;
+                allies = Monsters;
+                opponents = Heroes;
             }
 
 

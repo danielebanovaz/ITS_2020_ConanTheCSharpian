@@ -15,7 +15,7 @@ namespace ConanTheCSharpian.Core
             Accuracy = 0.85f;
         }
 
-        public override void PerformSpecialAction()
+        protected override void PerformSpecialAction()
         {
             List<Character> allies = Battlefield.GetValidTargets(this, TargetType.Allies);
 

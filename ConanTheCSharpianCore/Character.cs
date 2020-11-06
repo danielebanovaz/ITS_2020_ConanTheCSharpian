@@ -10,6 +10,7 @@ namespace ConanTheCSharpian.Core
     public abstract class Character
     {
         protected static Random Random = new Random();
+        private const float MANA_REGEN_PER_TURN = 10;
 
         #region Fields & Properties
 
@@ -45,10 +46,25 @@ namespace ConanTheCSharpian.Core
         private float _currentHealth;
 
         /// <summary>
+        /// Maximum health mana to the Character
+        /// </summary>
+        protected float MaxMana;
+
+        /// <summary>
+        /// Current mana of the Character
+        /// </summary>
+        private float _currentMana;
+
+        /// <summary>
         /// Chance of successfully hitting an opponent during an attack
         /// (expressed in a [0, 1] range)
         /// </summary>
         protected float Accuracy;
+
+        /// <summary>
+        /// Mana consumed by using the special action
+        /// </summary>
+        protected float ManaConsumption;
 
         /// <summary>
         /// Character controller currently in charge of controlling this character
@@ -94,6 +110,25 @@ namespace ConanTheCSharpian.Core
         }
 
         /// <summary>
+        /// Current mana of the character.
+        /// Automatically handles Max Mana capping
+        /// </summary>
+        public float CurrentMana
+        {
+            get
+            {
+                return _currentMana;
+            }
+            private set
+            {
+                if (value > MaxMana)
+                    value = MaxMana;
+
+                _currentMana = value;
+            }
+        }
+
+        /// <summary>
         /// Get class name for this character
         /// I.E.: "Mage", "Barbarian", "Troll"...
         /// </summary>
@@ -113,6 +148,16 @@ namespace ConanTheCSharpian.Core
             }
         }
 
+        public bool CanUseSpecial
+        {
+            get
+            {
+                return ManaConsumption <= CurrentMana;
+            }
+        }
+
+        public float NextBaseAttackBoost;
+
         #endregion Fields & Properties
 
         public void Initialize(Battlefield battlefield, ICharacterController controller, string customName = null)
@@ -120,6 +165,7 @@ namespace ConanTheCSharpian.Core
             Battlefield = battlefield;
             _controller = controller;
             _currentHealth = MaxHealth;
+            _currentMana = MaxMana;
 
             if (string.IsNullOrWhiteSpace(customName))
                 customName = GetRandomName();
@@ -134,12 +180,39 @@ namespace ConanTheCSharpian.Core
             if (IsDead)
                 return;
 
-            _controller.ChooseAttackType(this);
+            if (CanUseSpecial)
+            {
+                AttackType attackType = _controller.ChooseAttackType(this);
+                switch (attackType)
+                {
+                    case AttackType.BaseAttack:
+                        PerformBaseAttack();
+                        break;
+                    case AttackType.SpecialAction:
+                        PerformSpecialAction();
+                        CurrentMana -= ManaConsumption;
+                        break;
+                    default: throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                PerformBaseAttack();
+            }
+
+            CurrentMana += MANA_REGEN_PER_TURN;
         }
 
-        public void PerformBaseAttack()
+        private void PerformBaseAttack()
         {
-            Attack(GetRandomCharacter(), Damage, Accuracy);
+            float damage = Damage;
+            if (NextBaseAttackBoost != 0)
+            {
+                damage *= NextBaseAttackBoost;
+                NextBaseAttackBoost = 0;
+            }
+
+            Attack(GetRandomCharacter(), damage, Accuracy);
         }
 
         protected Character GetRandomCharacter(TargetType targetType = TargetType.Opponents)
@@ -160,7 +233,7 @@ namespace ConanTheCSharpian.Core
             target.CurrentHealth -= damage;
         }
 
-        public abstract void PerformSpecialAction();
+        protected abstract void PerformSpecialAction();
 
         #endregion Actions
 
@@ -187,8 +260,16 @@ namespace ConanTheCSharpian.Core
         Barbarian,
         Ranger,
         Mage,
+        Paladin,
         Troll,
         Goblin,
-        Warlock
+        Warlock,
+        Necromancer,
+        Skeleton
+    }
+
+    public enum AttackType
+    {
+        BaseAttack, SpecialAction
     }
 }

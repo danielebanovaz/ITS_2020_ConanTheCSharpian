@@ -20,7 +20,7 @@ namespace ConanTheCSharpian.Core
             }
         }
 
-        protected void CreateNewCharacter(CharacterType characterType, ICharacterController controller, Battlefield battlefield, string customName = null)
+        public void CreateNewCharacter(CharacterType characterType, ICharacterController controller, Battlefield battlefield, string customName = null)
         {
             Character newCharacter;
             switch (characterType)
@@ -28,9 +28,12 @@ namespace ConanTheCSharpian.Core
                 case CharacterType.Barbarian: newCharacter = new Barbarian(); break;
                 case CharacterType.Ranger: newCharacter = new Ranger(); break;
                 case CharacterType.Mage: newCharacter = new Mage(); break;
+                case CharacterType.Paladin: newCharacter = new Paladin(); break;
                 case CharacterType.Troll: newCharacter = new Troll(); break;
                 case CharacterType.Goblin: newCharacter = new Goblin(); break;
                 case CharacterType.Warlock: newCharacter = new Warlock(); break;
+                case CharacterType.Necromancer: newCharacter = new Necromancer(); break;
+                case CharacterType.Skeleton: newCharacter = new Skeleton(); break;
                 default: throw new NotSupportedException();
             }
 

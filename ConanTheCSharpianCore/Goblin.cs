@@ -11,7 +11,7 @@ namespace ConanTheCSharpian.Core
             Accuracy = 0.8f;
         }
 
-        public override void PerformSpecialAction()
+        protected override void PerformSpecialAction()
         {
             Attack(GetRandomCharacter(), Damage * 0.75f, Accuracy * 2, "Special attack: ");
         }

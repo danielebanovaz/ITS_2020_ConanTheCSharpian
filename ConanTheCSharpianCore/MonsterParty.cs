@@ -9,7 +9,7 @@ namespace ConanTheCSharpian.Core
     {
 
         protected override List<CharacterType> AllowedCharacterTypes => new List<CharacterType>() {
-            CharacterType.Troll, CharacterType.Goblin, CharacterType.Warlock
+            CharacterType.Troll, CharacterType.Goblin, CharacterType.Warlock, CharacterType.Necromancer
         };
 
 

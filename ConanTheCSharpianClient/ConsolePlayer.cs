@@ -14,7 +14,8 @@ namespace ConanTheCSharpian.Client
                 Console.WriteLine(@"Choose your character's class:
 - [B]arbarian
 - [R]anger
-- [M]age");
+- [M]age
+- [P]aladin");
                 string choice = Console.ReadLine();
                 switch (choice.ToLower())
                 {
@@ -29,6 +30,10 @@ namespace ConanTheCSharpian.Client
                     case "m":
                     case "mage":
                         return CharacterType.Mage;
+
+                    case "p":
+                    case "paladin":
+                        return CharacterType.Paladin;
                 }
             }
         }
@@ -58,7 +63,7 @@ namespace ConanTheCSharpian.Client
             } while (true);
         }
 
-        public void ChooseAttackType(Character controlledCharacter)
+        public AttackType ChooseAttackType(Character controlledCharacter)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"It's time for {controlledCharacter.FullyQualifiedName} to act. Please choose his action between [B]ase attack and [S]pecial action:");
@@ -69,13 +74,8 @@ namespace ConanTheCSharpian.Client
                 ConsoleKey choice = Console.ReadKey(true).Key;
                 switch (choice)
                 {
-                    case ConsoleKey.B:
-                        controlledCharacter.PerformBaseAttack();
-                        return;
-
-                    case ConsoleKey.S:
-                        controlledCharacter.PerformSpecialAction();
-                        return;
+                    case ConsoleKey.B: return AttackType.BaseAttack;
+                    case ConsoleKey.S: return AttackType.SpecialAction;
                 }
 
                 Console.WriteLine("Invalid option. Please digit 'B' for Base attack and 'S' for Special action");
