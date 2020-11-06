@@ -54,6 +54,7 @@ namespace ConanTheCSharpian.Core
         /// </summary>
         private ICharacterController _controller;
 
+
         /// <summary>
         /// Battlefield in which this character acts
         /// </summary>
@@ -74,6 +75,7 @@ namespace ConanTheCSharpian.Core
             // Equivalent to "SetCurrentHealth(value)"
             protected set
             {
+
                 if (value > MaxHealth)
                     value = MaxHealth;
 
@@ -81,6 +83,7 @@ namespace ConanTheCSharpian.Core
                     return;
 
                 _currentHealth = value;
+
 
                 if (IsDead)
                 {
@@ -151,18 +154,23 @@ namespace ConanTheCSharpian.Core
         }
 
         public abstract void PerformSpecialAction();
+        
 
         #endregion Actions
-    }
 
-    public enum CharacterType
-    {
-        Barbarian,
-        Ranger,
-        Mage,
-        Troll,
-        Goblin,
-        Warlock
-    }
 
+        public enum CharacterType
+        {
+            Barbarian,
+            Ranger,
+            Mage,
+            Troll,
+            Goblin,
+            Warlock,
+            Paladin,
+            Necromancer,
+            Skeleton
+        }
+
+    }
 }

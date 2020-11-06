@@ -30,7 +30,7 @@ namespace ConanTheCSharpian.Core
             _messageHandler.DisplayMessage(message, pause);
         }
 
-        public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController)
+        public void RunBattle(Character.CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController)
         {
             _heroes = new HeroParty(this, _ai);
             _monsters = new MonsterParty(this, _ai);

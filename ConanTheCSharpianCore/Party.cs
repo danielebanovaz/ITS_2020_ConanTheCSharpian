@@ -40,7 +40,7 @@ namespace ConanTheCSharpian.Core
             return aliveCharacters;
         }
 
-        internal TCharacter this[CharacterType characterType]
+        internal TCharacter this[Character.CharacterType characterType]
         {
             get
             {

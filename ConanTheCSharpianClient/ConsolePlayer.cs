@@ -7,28 +7,34 @@ namespace ConanTheCSharpian.Client
 {
     public class ConsolePlayer : ICharacterController
     {
-        public CharacterType ChooseHeroCategory()
+        public Character.CharacterType ChooseHeroCategory()
         {
             while (true)
             {
                 Console.WriteLine(@"Choose your character's class:
 - [B]arbarian
 - [R]anger
-- [M]age");
+- [M]age
+- [P]aladin");
+              
                 string choice = Console.ReadLine();
                 switch (choice.ToLower())
                 {
                     case "b":
                     case "barbarian":
-                        return CharacterType.Barbarian;
+                        return Character.CharacterType.Barbarian;
 
                     case "r":
                     case "ranger":
-                        return CharacterType.Ranger;
+                        return Character.CharacterType.Ranger;
 
                     case "m":
                     case "mage":
-                        return CharacterType.Mage;
+                        return Character.CharacterType.Mage;
+                    case "p":
+                    case "paladin":
+                        return Character.CharacterType.Paladin;
+
                 }
             }
         }
@@ -56,16 +62,19 @@ namespace ConanTheCSharpian.Client
                 ConsoleKey choice = Console.ReadKey(true).Key;
                 switch (choice)
                 {
+                    
                     case ConsoleKey.B:
+                  
                         controlledCharacter.PerformBaseAttack();
                         return;
-
+                    
                     case ConsoleKey.S:
+                    
                         controlledCharacter.PerformSpecialAction();
                         return;
                 }
 
-                Console.WriteLine("Invalid option. Please digit 'B' for Base attack and 'S' for Special action");
+                Console.WriteLine("Invalid option. Please digit 'B'  for Base attack and 'S'  for Special action");
             }
         }
     }

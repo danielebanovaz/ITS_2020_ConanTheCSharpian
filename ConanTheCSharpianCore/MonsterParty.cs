@@ -16,6 +16,8 @@ namespace ConanTheCSharpian.Core
             Characters.Add(new Goblin());
             Characters.Add(new Troll());
             Characters.Add(new Warlock());
+            Characters.Add(new Necromancer());
+            Characters.Add(new Skeleton());
         }
     }
 }
