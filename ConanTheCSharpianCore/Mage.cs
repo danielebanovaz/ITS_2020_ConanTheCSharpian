@@ -14,8 +14,12 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
-            Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+
+            Character target = ChooseLowerHealthAlly();
+
+            Battlefield.DisplayMessage($"{FullyQualifiedName} heals {target.FullyQualifiedName} with his SPECIAL ATTACK");
+            //target.CurrentHealth -= _damageForThisAction;
+            ReduceTargetHealth(target, -30);
         }
     }
 }

@@ -49,6 +49,25 @@ namespace ConanTheCSharpian.Core
         /// </summary>
         protected float Accuracy;
 
+        protected float MaxMana;
+        private float _currentMana;
+        public float CurrentMana
+        {
+            get
+            {
+                return _currentMana;
+            }
+
+            set
+            {
+                if (value > MaxMana)
+                    value = MaxMana;
+
+                _currentMana = value;
+
+            }
+        }
+
         /// <summary>
         /// Character controller currently in charge of controlling this character
         /// </summary>
@@ -119,6 +138,7 @@ namespace ConanTheCSharpian.Core
             Battlefield = battlefield;
             _controller = controller;
             _currentHealth = MaxHealth;
+            _currentMana = MaxMana;
 
             if (!string.IsNullOrWhiteSpace(customName))
                 Name = customName;
@@ -134,11 +154,35 @@ namespace ConanTheCSharpian.Core
             _controller.ChooseAttackType(this);
         }
 
-        public void PerformBaseAttack()
+        public Character ChooseTarget() 
         {
             List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
             int randomIndex = _random.Next(0, validTargets.Count - 1);
             Character target = validTargets[randomIndex];
+            return target;
+        }
+        public Character ChooseLowerHealthAlly()
+        {
+            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Allies);
+            Character lowerHealthAlly = validTargets[0];
+            foreach(Character currentMember in validTargets)
+            {
+                if (currentMember.CurrentHealth < lowerHealthAlly.CurrentHealth)
+                    lowerHealthAlly = currentMember;
+            }
+            return lowerHealthAlly;
+        }
+        public void ReduceTargetHealth(Character target, float damage)
+        {
+            target.CurrentHealth -= damage;
+        }
+
+        public void PerformBaseAttack()
+        {
+            //List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
+            //int randomIndex = _random.Next(0, validTargets.Count - 1);
+            //Character target = validTargets[randomIndex];
+            Character target = ChooseTarget();
 
             if (_random.NextDouble() > Accuracy)
             {
@@ -147,7 +191,8 @@ namespace ConanTheCSharpian.Core
             }
 
             Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
-            target.CurrentHealth -= Damage;
+            //target.CurrentHealth -= Damage;
+            ReduceTargetHealth(target, Damage);
         }
 
         public abstract void PerformSpecialAction();
@@ -162,7 +207,10 @@ namespace ConanTheCSharpian.Core
         Mage,
         Troll,
         Goblin,
-        Warlock
+        Warlock,
+        paladin,
+        Negromancer,
+        Skeleton
     }
 
 }

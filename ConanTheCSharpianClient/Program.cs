@@ -22,7 +22,14 @@ namespace ConanTheCSharpian.Client
                 CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
 
-                Battlefield battlefield = new Battlefield(consoleMessageHandler);
+                //TODO
+                //Forse il programma non genera il numero corretto di personaggi
+                //inserire un metodo per la visualizzazione del party all'inizio della partita dopo la generazione dei personaggi
+
+                int numberOfHeroPartyMembers = player.ChooseHeroPartyNumber();
+                int numberOfMonsterPartyMembers = player.ChooseMonsterPartyNumber();
+
+                Battlefield battlefield = new Battlefield(consoleMessageHandler, numberOfHeroPartyMembers, numberOfMonsterPartyMembers);
                 battlefield.RunBattle(type, name, player);
 
                 Console.WriteLine("Do you want to play again? [Y/N]");
