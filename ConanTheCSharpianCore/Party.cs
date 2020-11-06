@@ -3,11 +3,14 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace ConanTheCSharpian.Core
 {
     public abstract class Party<TCharacter> : IParty
         where TCharacter : Character
     {
+
+
         protected List<TCharacter> Characters = new List<TCharacter>();
 
         public Party(Battlefield battlefield, ICharacterController characterController)
