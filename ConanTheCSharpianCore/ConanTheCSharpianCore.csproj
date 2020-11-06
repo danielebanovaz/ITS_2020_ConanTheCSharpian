@@ -47,6 +47,8 @@
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="ICharacterController.cs" />
     <Compile Include="MonsterParty.cs" />
+    <Compile Include="Ramdom.cs" />
+    <Compile Include="random.cs" />
     <Compile Include="Warlock.cs" />
     <Compile Include="Troll.cs" />
     <Compile Include="Goblin.cs" />

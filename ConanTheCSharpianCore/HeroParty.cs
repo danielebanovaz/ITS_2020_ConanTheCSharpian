@@ -17,5 +17,6 @@ namespace ConanTheCSharpian.Core
             Characters.Add(new Ranger());
             Characters.Add(new Mage());
         }
+     
     }
 }
