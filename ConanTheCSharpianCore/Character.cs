@@ -102,7 +102,8 @@ namespace ConanTheCSharpian.Core
         /// Get a fully qualified name for the character, using Name and Category.
         /// I.E.: "Gandalf the Mage"
         /// </summary>
-        public string FullyQualifiedName => $"{Name} the {Category}"; // even more condensed way of writing get { return ... }
+        public string FullyQualifiedName => $"{Name} the {Category}"; 
+        // even more condensed way of writing get { return ... }
 
         public bool IsDead
         {
