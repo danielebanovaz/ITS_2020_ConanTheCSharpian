@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Battlefield.cs" />
     <Compile Include="Ai.cs" />
+    <Compile Include="Paladin.cs" />
     <Compile Include="Party.cs" />
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="ICharacterController.cs" />

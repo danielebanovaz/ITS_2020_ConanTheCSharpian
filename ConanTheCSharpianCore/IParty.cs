@@ -8,6 +8,6 @@ namespace ConanTheCSharpian.Core
     {
         bool IsEverybodyDead();
 
-        List<Character> GetAliveCharacters();
+       List<Character> GetAliveCharacters();
     }
 }

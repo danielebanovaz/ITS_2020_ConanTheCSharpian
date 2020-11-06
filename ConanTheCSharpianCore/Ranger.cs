@@ -1,5 +1,8 @@
 ﻿
 
+using System;
+using System.Collections.Generic;
+
 namespace ConanTheCSharpian.Core
 {
     public class Ranger : Hero
@@ -14,8 +17,17 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
+            Random randomNumber = new Random();
             Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+            /*for (int i = 0; i < 3; i++)
+            {
+                
+               List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
+                int randomIndex = randomNumber.Next(0, validTargets.Count - 1);
+               Character target = validTargets[randomIndex];
+               //target.CurrentHealth -= Damage;
+            }*/
+  
         }
     }
 }
