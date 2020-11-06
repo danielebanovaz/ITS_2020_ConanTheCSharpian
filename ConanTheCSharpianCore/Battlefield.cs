@@ -41,6 +41,7 @@ namespace ConanTheCSharpian.Core
             int currentTurn = 1;
             do
             {
+                // TODO: increment Mana
                 DisplayMessage($"\n\tTurn {currentTurn} is about to start:", true);
 
                 if (LetPartyAct(_heroes))
@@ -49,6 +50,7 @@ namespace ConanTheCSharpian.Core
                 if (LetPartyAct(_monsters))
                     break;
 
+                
                 currentTurn++;
 
             } while (!IsGameFinished);

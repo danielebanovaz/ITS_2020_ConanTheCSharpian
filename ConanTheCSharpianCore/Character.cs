@@ -8,7 +8,7 @@ namespace ConanTheCSharpian.Core
 {
     public abstract class Character
     {
-        private static Random _random = new Random();
+        public static Random _random = new Random();
 
         #region Fields & Properties
 
@@ -34,6 +34,11 @@ namespace ConanTheCSharpian.Core
         protected float Damage;
 
         /// <summary>
+        /// Special damage inflicted by the Character during special attack
+        /// </summary>
+        protected float DamageSp;
+
+        /// <summary>
         /// Maximum health available to the Character
         /// </summary>
         protected float MaxHealth;
@@ -48,6 +53,22 @@ namespace ConanTheCSharpian.Core
         /// (expressed in a [0, 1] range)
         /// </summary>
         protected float Accuracy;
+
+        /// <summary>
+        /// Chance of successfully hitting an opponent during an special attack
+        /// (expressed in a [0, 1] range)
+        /// </summary>
+        protected float AccuracySp;
+
+        /// <summary>
+        /// max energy for special action 
+        /// </summary>
+        protected float MaxMana;
+
+        /// <summary>
+        /// current energy for special action 
+        /// </summary>
+        private float _currentMana;
 
         /// <summary>
         /// Character controller currently in charge of controlling this character
@@ -92,6 +113,25 @@ namespace ConanTheCSharpian.Core
             }
         }
 
+        public float CurrentMana
+        {
+            // Equivalent to "GetCurrentmana()"
+            get
+            {
+                return _currentMana;
+            }
+
+            // Equivalent to "SetCurrentmana(value)"
+            protected set
+            {
+                if (value > MaxMana)
+                    value = MaxMana;
+
+                _currentMana = value;
+   
+            }
+        }
+
         /// <summary>
         /// Get class name for this character
         /// I.E.: "Mage", "Barbarian", "Troll"...
@@ -119,6 +159,7 @@ namespace ConanTheCSharpian.Core
             Battlefield = battlefield;
             _controller = controller;
             _currentHealth = MaxHealth;
+            _currentMana = MaxMana;
 
             if (!string.IsNullOrWhiteSpace(customName))
                 Name = customName;
@@ -150,7 +191,51 @@ namespace ConanTheCSharpian.Core
             target.CurrentHealth -= Damage;
         }
 
-        public abstract void PerformSpecialAction();
+        public virtual void PerformSpecialAction()
+        {
+
+            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
+            int randomIndex = _random.Next(0, validTargets.Count - 1);
+            Character target = validTargets[randomIndex];
+
+            if (_random.NextDouble() > AccuracySp)
+            {
+                Battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}.");
+                return;
+            }
+
+            Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {DamageSp} special damage.");
+            target.CurrentHealth -= DamageSp;
+
+            // TODO: implement healing for Mage
+        }
+
+        public virtual void PerformSpecialActionPaladin()
+        {
+            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Opponents);
+            int randomIndex = _random.Next(0, validTargets.Count - 1);
+            Character target = validTargets[randomIndex];
+
+            foreach (object i in validTargets)
+            {
+                if (_currentMana <= 30)
+                {
+                    Battlefield.DisplayMessage($"{FullyQualifiedName} missed his attack against {target.FullyQualifiedName}. Not enough Mana");
+                    return;
+                }
+
+                Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {DamageSp} special damage.");
+                target.CurrentHealth -= DamageSp;
+            }
+
+            _currentMana -= 30;
+                
+            
+
+
+            // TODO: implement healing for Paladin
+        }
+
 
         #endregion Actions
     }
@@ -160,6 +245,7 @@ namespace ConanTheCSharpian.Core
         Barbarian,
         Ranger,
         Mage,
+        Paladin,
         Troll,
         Goblin,
         Warlock
