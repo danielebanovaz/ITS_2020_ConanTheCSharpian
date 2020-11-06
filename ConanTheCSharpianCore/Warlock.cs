@@ -1,5 +1,8 @@
 ﻿
 
+using System;
+using System.Collections.Generic;
+
 namespace ConanTheCSharpian.Core
 {
     public class Warlock : Monster
@@ -11,6 +14,8 @@ namespace ConanTheCSharpian.Core
             MaxHealth = 70;
             Accuracy = 0.7f;
         }
+
+        private static Random _random = new Random();
 
         public override void PerformSpecialAction()
         {

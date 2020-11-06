@@ -14,6 +14,7 @@ namespace ConanTheCSharpian.Client
 
             IMessageHandler consoleMessageHandler = new ConsoleOutput();
             ConsolePlayer player = new ConsolePlayer();
+            ConsolePlayer heroOrMonster = new ConsolePlayer();
 
             while (true)
             {
@@ -21,6 +22,9 @@ namespace ConanTheCSharpian.Client
 
                 CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
+                string numberHeroes = heroOrMonster.ChooseNumberOfHeroes();
+                string numberMonsters = heroOrMonster.ChooseNumberOfMonsters();
+                
 
                 Battlefield battlefield = new Battlefield(consoleMessageHandler);
                 battlefield.RunBattle(type, name, player);

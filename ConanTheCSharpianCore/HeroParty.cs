@@ -10,12 +10,16 @@ namespace ConanTheCSharpian.Core
         public HeroParty(Battlefield battlefield, ICharacterController characterController)
             : base (battlefield, characterController)
         { }
-
+        
         protected override void CreateCharacterInstances()
         {
-            Characters.Add(new Barbarian());
-            Characters.Add(new Ranger());
-            Characters.Add(new Mage());
+            
+            {
+                Characters.Add(new Barbarian());
+                Characters.Add(new Ranger());
+                Characters.Add(new Mage());
+            }
+            
         }
     }
 }
