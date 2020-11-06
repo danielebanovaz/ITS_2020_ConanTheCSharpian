@@ -45,6 +45,28 @@ namespace ConanTheCSharpian.Client
             return name;
         }
 
+        public int ChooseNumberOfAllies()
+        {
+            int numberOfAllies;
+            do
+            {
+                Console.WriteLine("Choose the number of your allies: ");
+                numberOfAllies = Convert.ToInt32(Console.ReadLine());//manca un try catch per controllare se l'utente non scrive un numero o un numero sbagliato
+            } while (numberOfAllies < 0);
+            return numberOfAllies;
+        }
+
+        public int ChooseNumberOfMonsters()
+        {
+            int numberOfMonsters;
+            do
+            {
+                Console.WriteLine("Choose the number of monsters: ");
+                numberOfMonsters = Convert.ToInt32(Console.ReadLine());//manca un try catch per controllare se l'utente non scrive un numero o un numero sbagliato
+            } while (numberOfMonsters < 0);
+            return numberOfMonsters;
+        }
+
         public void ChooseAttackType(Character controlledCharacter)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

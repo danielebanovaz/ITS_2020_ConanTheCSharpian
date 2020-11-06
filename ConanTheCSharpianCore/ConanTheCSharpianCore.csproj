@@ -43,10 +43,13 @@
   <ItemGroup>
     <Compile Include="Battlefield.cs" />
     <Compile Include="Ai.cs" />
+    <Compile Include="Necromancer.cs" />
+    <Compile Include="Paladin.cs" />
     <Compile Include="Party.cs" />
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="ICharacterController.cs" />
     <Compile Include="MonsterParty.cs" />
+    <Compile Include="Skeleton.cs" />
     <Compile Include="Warlock.cs" />
     <Compile Include="Troll.cs" />
     <Compile Include="Goblin.cs" />

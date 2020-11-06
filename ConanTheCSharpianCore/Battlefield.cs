@@ -49,6 +49,7 @@ namespace ConanTheCSharpian.Core
                 if (LetPartyAct(_monsters))
                     break;
 
+                
                 currentTurn++;
 
             } while (!IsGameFinished);
@@ -106,6 +107,41 @@ namespace ConanTheCSharpian.Core
             }
 
             return validTargets;
+        }
+        internal List<Character> GetInvalidTargets(Character callingCharacter, TargetType targetsType)
+        {
+            List<Character> invalidTargets = new List<Character>();
+
+            IParty allies;
+            IParty opponents;
+
+            if (callingCharacter is Hero)
+            {
+                allies = _monsters;
+                opponents = _heroes;
+            }
+            else
+            {
+                allies = _heroes;
+                opponents = _monsters;
+            }
+
+
+            switch (targetsType)
+            {
+                case TargetType.Opponents:
+                    invalidTargets.AddRange(opponents.GetAliveCharacters());
+                    break;
+                case TargetType.Allies:
+                    invalidTargets.AddRange(allies.GetAliveCharacters());
+                    break;
+                case TargetType.All:
+                    invalidTargets.AddRange(allies.GetAliveCharacters());
+                    invalidTargets.AddRange(opponents.GetAliveCharacters());
+                    break;
+            }
+
+            return invalidTargets;
         }
     }
 

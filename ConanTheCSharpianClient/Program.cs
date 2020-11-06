@@ -11,27 +11,28 @@ namespace ConanTheCSharpian.Client
     {
         static void Main(string[] args)
         {
+        IMessageHandler consoleMessageHandler = new ConsoleOutput();
+        ConsolePlayer player = new ConsolePlayer();
 
-            IMessageHandler consoleMessageHandler = new ConsoleOutput();
-            ConsolePlayer player = new ConsolePlayer();
+        while (true)
+        {
+            DisplayGameTitle();
 
-            while (true)
-            {
-                DisplayGameTitle();
+            CharacterType type = player.ChooseHeroCategory();
+            string name = player.ChooseHeroName();
+            player.ChooseNumberOfAllies();
+            player.ChooseNumberOfMonsters();
 
-                CharacterType type = player.ChooseHeroCategory();
-                string name = player.ChooseHeroName();
+            Battlefield battlefield = new Battlefield(consoleMessageHandler);
+            battlefield.RunBattle(type, name, player);
 
-                Battlefield battlefield = new Battlefield(consoleMessageHandler);
-                battlefield.RunBattle(type, name, player);
+            Console.WriteLine("Do you want to play again? [Y/N]");
+            if (Console.ReadKey(true).Key != ConsoleKey.Y)
+                return;
 
-                Console.WriteLine("Do you want to play again? [Y/N]");
-                if (Console.ReadKey(true).Key != ConsoleKey.Y)
-                    return;
-
-                Console.Clear();
-            }
+            Console.Clear();
         }
+    }
 
         private static void DisplayGameTitle()
         {
