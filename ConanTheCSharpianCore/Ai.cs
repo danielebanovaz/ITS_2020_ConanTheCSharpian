@@ -8,6 +8,8 @@ namespace ConanTheCSharpian.Core
     {
         private Random _random = new Random();
 
+        
+
         public void ChooseAttackType(Character controlledCharacter)
         {
             int randomDiceRoll = _random.Next(1, 10);
@@ -17,5 +19,7 @@ namespace ConanTheCSharpian.Core
             else
                 controlledCharacter.PerformBaseAttack();
         }
+
+       
     }
 }
