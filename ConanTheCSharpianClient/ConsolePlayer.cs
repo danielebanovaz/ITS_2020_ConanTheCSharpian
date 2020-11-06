@@ -68,5 +68,15 @@ namespace ConanTheCSharpian.Client
                 Console.WriteLine("Invalid option. Please digit 'B' for Base attack and 'S' for Special action");
             }
         }
+        public int [] ChooseAmountCharacter()
+        {
+            int[] charactersAmount = new int[2];
+            Console.WriteLine(@"Choose your allies amount:");
+            charactersAmount[0] = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(@"Choose your enemies amount:");
+            charactersAmount[1] = Convert.ToInt32(Console.ReadLine());
+            return charactersAmount;
+        }
     }
 }
+

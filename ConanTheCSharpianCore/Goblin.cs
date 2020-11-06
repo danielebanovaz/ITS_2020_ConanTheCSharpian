@@ -14,7 +14,7 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
+            Damage = Damage * 0.75f;
             Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
         }
     }

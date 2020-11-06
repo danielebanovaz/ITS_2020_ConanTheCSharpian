@@ -30,12 +30,12 @@ namespace ConanTheCSharpian.Core
             _messageHandler.DisplayMessage(message, pause);
         }
 
-        public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController)
+        public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController, int [] characterAmount)
         {
-            _heroes = new HeroParty(this, _ai);
-            _monsters = new MonsterParty(this, _ai);
-
-            Character userControlledCharacter = _heroes[userControlledCharacterType];
+            _heroes = new HeroParty(this, _ai, characterAmount[0]);
+            _monsters = new MonsterParty(this, _ai, characterAmount[1]);
+            Character userControlledCharacter = _heroes[userControlledCharacterType]; //Vista l'implementazione dovevo ridefinire il consolePlayer, in modo tale che il metodo tornasse direttamente l'oggetto del character scelto dall'utente
+            //Piuttosto che il charactertype. Oppure riscrivere un altro metodo per gestire l'eccezione che genera nel momento in cui non crea il character.
             userControlledCharacter.Initialize(this, playerController, userControlledCharacterName);
 
             int currentTurn = 1;

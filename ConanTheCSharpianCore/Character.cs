@@ -27,7 +27,22 @@ namespace ConanTheCSharpian.Core
         //     protected set { _verboseNameProperty = value; }
         // }
 
+        private int _mana;
 
+        private int _damageIncrease;
+
+        public float damageIncrease
+        {
+            get
+            {
+                return _damageIncrease;
+            }
+
+            set
+            {
+                value = _damageIncrease;
+            }
+        }
         /// <summary>
         /// Base damage inflicted by the Character
         /// </summary>
@@ -103,7 +118,9 @@ namespace ConanTheCSharpian.Core
         /// I.E.: "Gandalf the Mage"
         /// </summary>
         public string FullyQualifiedName => $"{Name} the {Category}"; // even more condensed way of writing get { return ... }
-
+        public int mana;
+        public int manacost;
+      
         public bool IsDead
         {
             get
@@ -147,10 +164,24 @@ namespace ConanTheCSharpian.Core
             }
 
             Battlefield.DisplayMessage($"{FullyQualifiedName} attacked {target.FullyQualifiedName} for {Damage} damage.");
+            if (damageIncrease!= 0)
+            {
+                Console.WriteLine("Attacco incrementato");
+                target.CurrentHealth -= Damage + damageIncrease;
+                this.damageIncrease = 0;
+            }
+           
+            
             target.CurrentHealth -= Damage;
         }
 
+        
+
         public abstract void PerformSpecialAction();
+
+
+         
+        
 
         #endregion Actions
     }
