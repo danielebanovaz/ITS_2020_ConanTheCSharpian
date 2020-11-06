@@ -9,16 +9,36 @@ namespace ConanTheCSharpian.Core
         where TCharacter : Character
     {
         protected List<TCharacter> Characters = new List<TCharacter>();
+        protected abstract List<CharacterType> AllowedCharacterTypes { get; }
 
-        public Party(Battlefield battlefield, ICharacterController characterController)
+        public Party(Battlefield battlefield, ICharacterController characterController, int amountToCreate)
         {
-            CreateCharacterInstances();
-
-            foreach (Character characterToInitialize in Characters)
-                characterToInitialize.Initialize(battlefield, characterController);
+            Random randomGenerator = new Random();
+            for (int i = 0; i < amountToCreate; i++)
+            {
+                int randomIndex = randomGenerator.Next(0, AllowedCharacterTypes.Count);
+                CharacterType randomType = AllowedCharacterTypes[randomIndex];
+                CreateNewCharacter(randomType, characterController, battlefield);
+            }
         }
 
-        protected abstract void CreateCharacterInstances();
+        protected void CreateNewCharacter(CharacterType characterType, ICharacterController controller, Battlefield battlefield, string customName = null)
+        {
+            Character newCharacter;
+            switch (characterType)
+            {
+                case CharacterType.Barbarian: newCharacter = new Barbarian(); break;
+                case CharacterType.Ranger: newCharacter = new Ranger(); break;
+                case CharacterType.Mage: newCharacter = new Mage(); break;
+                case CharacterType.Troll: newCharacter = new Troll(); break;
+                case CharacterType.Goblin: newCharacter = new Goblin(); break;
+                case CharacterType.Warlock: newCharacter = new Warlock(); break;
+                default: throw new NotSupportedException();
+            }
+
+            newCharacter.Initialize(battlefield, controller, customName);
+            Characters.Insert(0, (TCharacter)newCharacter);
+        }
 
         public bool IsEverybodyDead()
         {

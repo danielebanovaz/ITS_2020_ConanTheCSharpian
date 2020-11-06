@@ -7,15 +7,14 @@ namespace ConanTheCSharpian.Core
 {
     public class HeroParty : Party<Hero>
     {
-        public HeroParty(Battlefield battlefield, ICharacterController characterController)
-            : base (battlefield, characterController)
-        { }
+        protected override List<CharacterType> AllowedCharacterTypes => new List<CharacterType>() {
+            CharacterType.Barbarian, CharacterType.Ranger, CharacterType.Mage
+        };
 
-        protected override void CreateCharacterInstances()
+        public HeroParty(Battlefield battlefield, CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController, int alliesAmount, ICharacterController aiController)
+            : base (battlefield, aiController, alliesAmount)
         {
-            Characters.Add(new Barbarian());
-            Characters.Add(new Ranger());
-            Characters.Add(new Mage());
+            CreateNewCharacter(userControlledCharacterType, playerController, battlefield, userControlledCharacterName);
         }
     }
 }

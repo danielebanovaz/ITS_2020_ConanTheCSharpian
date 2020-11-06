@@ -45,6 +45,19 @@ namespace ConanTheCSharpian.Client
             return name;
         }
 
+        public int ChooseCharactersNumber(int min, string type)
+        {
+            int amount;
+            do
+            {
+                Console.WriteLine($"Choose how many {type} do you want (min {min}):");
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out amount) && (amount >= min))
+                    return amount;
+
+            } while (true);
+        }
+
         public void ChooseAttackType(Character controlledCharacter)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

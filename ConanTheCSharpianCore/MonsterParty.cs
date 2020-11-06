@@ -7,15 +7,14 @@ namespace ConanTheCSharpian.Core
 {
     public class MonsterParty : Party<Monster>
     {
-        public MonsterParty(Battlefield battlefield, ICharacterController characterController)
-               : base(battlefield, characterController)
-        { }
 
-        protected override void CreateCharacterInstances()
-        {
-            Characters.Add(new Goblin());
-            Characters.Add(new Troll());
-            Characters.Add(new Warlock());
-        }
+        protected override List<CharacterType> AllowedCharacterTypes => new List<CharacterType>() {
+            CharacterType.Troll, CharacterType.Goblin, CharacterType.Warlock
+        };
+
+
+        public MonsterParty(Battlefield battlefield, int monstersAmount, ICharacterController characterController)
+               : base(battlefield, characterController, monstersAmount)
+        { }
     }
 }
