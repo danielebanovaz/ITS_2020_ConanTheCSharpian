@@ -1,5 +1,5 @@
-﻿
-
+﻿using System;
+using System.Collections.Generic;
 namespace ConanTheCSharpian.Core
 {
     public class Mage : Hero
@@ -14,8 +14,22 @@ namespace ConanTheCSharpian.Core
 
         public override void PerformSpecialAction()
         {
-            // TODO: implement special action logic
-            Battlefield.DisplayMessage($"{FullyQualifiedName} just used his special action!");
+            float heal = 30;
+            List<Character> validTargets = Battlefield.GetValidTargets(this, TargetType.Allies); //NON SO PERCHè CRASHA
+            Character lowestHealthChar = null;
+            float min = 1000;
+            foreach(Character t in validTargets)
+            {
+                if (t.CurrentHealth< min)
+                {
+                    min = t.CurrentHealth;
+                    lowestHealthChar = t;
+                }
+            }
+    
+            Battlefield.DisplayMessage($"{FullyQualifiedName} healed {lowestHealthChar.FullyQualifiedName} for {heal} hp with his special attack.");
+            lowestHealthChar.CurrentHealth += heal; 
+
         }
     }
 }

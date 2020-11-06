@@ -30,10 +30,10 @@ namespace ConanTheCSharpian.Core
             _messageHandler.DisplayMessage(message, pause);
         }
 
-        public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController)
+        public void RunBattle(CharacterType userControlledCharacterType, string userControlledCharacterName, ICharacterController playerController, int alliesNumber, int monstersNumber)
         {
-            _heroes = new HeroParty(this, _ai);
-            _monsters = new MonsterParty(this, _ai);
+            _heroes = new HeroParty(this, _ai, alliesNumber);
+            _monsters = new MonsterParty(this, _ai, monstersNumber);
 
             Character userControlledCharacter = _heroes[userControlledCharacterType];
             userControlledCharacter.Initialize(this, playerController, userControlledCharacterName);
@@ -48,6 +48,8 @@ namespace ConanTheCSharpian.Core
 
                 if (LetPartyAct(_monsters))
                     break;
+
+                //TODO regenera 10 mana a tutti i personaggi che usano mana e che hanno il current mana < max mana (senza superare il max mana)
 
                 currentTurn++;
 
