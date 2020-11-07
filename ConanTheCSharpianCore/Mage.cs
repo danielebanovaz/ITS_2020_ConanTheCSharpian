@@ -10,6 +10,7 @@ namespace ConanTheCSharpian.Core
             Damage = 18;
             MaxHealth = 50;
             Accuracy = 0.85f;
+            SpAccuracy = 1;
         }
 
         public override void PerformSpecialAction()

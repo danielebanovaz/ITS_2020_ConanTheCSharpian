@@ -49,6 +49,16 @@ namespace ConanTheCSharpian.Core
         /// </summary>
         protected float Accuracy;
 
+        protected float SpAccuracy;
+
+        protected float SpDamage;
+
+        protected float SpCollateralDamage;
+
+        protected int MaxMana;
+
+        protected int ManaCost;
+
         /// <summary>
         /// Character controller currently in charge of controlling this character
         /// </summary>
@@ -72,7 +82,7 @@ namespace ConanTheCSharpian.Core
             }
 
             // Equivalent to "SetCurrentHealth(value)"
-            protected set
+            set
             {
                 if (value > MaxHealth)
                     value = MaxHealth;
