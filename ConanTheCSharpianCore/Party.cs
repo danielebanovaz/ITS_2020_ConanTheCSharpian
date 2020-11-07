@@ -9,16 +9,16 @@ namespace ConanTheCSharpian.Core
         where TCharacter : Character
     {
         protected List<TCharacter> Characters = new List<TCharacter>();
-
-        public Party(Battlefield battlefield, ICharacterController characterController)
+        private Random _random = new Random();
+        public Party(Battlefield battlefield, ICharacterController characterController, int numbers)
         {
-            CreateCharacterInstances();
+            CreateCharacterInstances(numbers);
 
             foreach (Character characterToInitialize in Characters)
                 characterToInitialize.Initialize(battlefield, characterController);
         }
 
-        protected abstract void CreateCharacterInstances();
+        protected abstract void CreateCharacterInstances(int numbers);
 
         public bool IsEverybodyDead()
         {
@@ -51,5 +51,15 @@ namespace ConanTheCSharpian.Core
                 throw new NotSupportedException($"{characterType} is not related to this party");
             }
         }
+
+        //public void CreateAllies()
+       // {
+          //  int m = _random.Next(0, Characters.ToString().Length);
+          //  Console.WriteLine(m);
+        //}
+        //public void CreateMonsters()
+        //{
+         //   int m = _random.Next(0, Characters.ToString().Length);
+        //}
     }
 }

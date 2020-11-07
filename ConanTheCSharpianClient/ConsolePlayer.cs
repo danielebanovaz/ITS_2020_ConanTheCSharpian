@@ -2,6 +2,8 @@
 
 using ConanTheCSharpian.Core;
 using System;
+using System.Collections.Generic;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace ConanTheCSharpian.Client
 {
@@ -45,6 +47,8 @@ namespace ConanTheCSharpian.Client
             return name;
         }
 
+        
+
         public void ChooseAttackType(Character controlledCharacter)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -67,6 +71,37 @@ namespace ConanTheCSharpian.Client
 
                 Console.WriteLine("Invalid option. Please digit 'B' for Base attack and 'S' for Special action");
             }
+        }
+
+        public int AlliesNumber()
+        {
+            int number = 0;
+            do
+            {
+                Console.WriteLine("how many allies you want to play with:");
+           // number = int.Parse(Console.ReadLine());
+            
+                number = int.Parse(Console.ReadLine());
+                if(number < 0)
+                Console.WriteLine("il minimo è 0.Please choose another number more than or equals a 0");
+               
+
+            } while (number < 0);
+            
+            return number;
+        }
+        public int MonstersNumber()
+        {
+            int number = 0;
+            do
+            {
+                Console.WriteLine("how many monsters you want to play against:");
+                number = int.Parse(Console.ReadLine());
+                if(number < 1)
+                Console.WriteLine("il minimo è 1.Please choose another number more than or equals a 1");
+                
+            } while (number < 1);
+            return number;
         }
     }
 }

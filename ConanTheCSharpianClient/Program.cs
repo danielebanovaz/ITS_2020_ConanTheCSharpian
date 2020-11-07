@@ -14,16 +14,20 @@ namespace ConanTheCSharpian.Client
 
             IMessageHandler consoleMessageHandler = new ConsoleOutput();
             ConsolePlayer player = new ConsolePlayer();
-
+           
             while (true)
             {
                 DisplayGameTitle();
 
                 CharacterType type = player.ChooseHeroCategory();
                 string name = player.ChooseHeroName();
+                int alliesNumber = player.AlliesNumber();
+                int monsterNumber = player.MonstersNumber();
+                
 
                 Battlefield battlefield = new Battlefield(consoleMessageHandler);
-                battlefield.RunBattle(type, name, player);
+                battlefield.RunBattle(type, name, player,alliesNumber,monsterNumber);
+
 
                 Console.WriteLine("Do you want to play again? [Y/N]");
                 if (Console.ReadKey(true).Key != ConsoleKey.Y)
